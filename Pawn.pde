@@ -1,5 +1,84 @@
-class Pawn implements Pan{
+class Pawn implements Pawn{
+float w, h, x, y, vx, vy, 
+accelerationX, accelerationY,
+speedLimit;
 
-  void move(int yChange){}
+//verden variable
+float friction, bounce, gravity;
+
+boolean isOnGround;
+float jumpForce;
+
+float halfWidth, halfHeight;
+String collisionSide;
+
+Pawn(){
+  w = 100; //140 original str
+  h = 65; // 95 original str
+  x = 400;
+  y = 150;
+  vx = 0;
+  vy = 0;
+  acceletationX = 0;
+  accelerationY = 0;
+  speedLimit = 5;
+  isOnGround = false;
+  jumpForce = -10;
   
+  // verden værdier
+  friction = 0.96;
+  bounce = -0.7;
+  gravity = 3;
+  
+  halfWidth = w/2;
+  halfHeight ) h/2;
+  
+  collisionSide = `` ´´;
+}
+
+}
+  void update(){
+    if (left && !right){
+    accelerationX = -0.2;
+  }
+   if (right && !left){
+    accelerationX = 0.2;
+  }
+   if (!left && !right){
+    accelerationX = 0;
+   }
+    if (up && !down){
+    accelerationY = -0.2;
+  }
+   if (down && !up){
+    accelerationY = 0.2;
+  }
+   if (!up && !down){
+    accelerationX = 0;  
+ }
+ vx += accelerationX;
+ vy += accelerationY;
+ 
+ ////maximum hastigheder
+ if (vx > speedLimit) { 
+   vx = speedLimit;
+ }
+  if (vx < -speedLimit) { 
+   vx = -speedLimit;
+ }
+  if (vy > speedLimit) { 
+   vy = speedLimit;
+ }
+  if (vy < -speedLimit) { 
+   vy = -speedLimit;
+ }
+ ////ryk spilleren
+ x+=vx;
+ y+=vy;
+ }
+ 
+ void display(){
+   fill(0, 255, 0, 128);
+   rect(x, y, w, h);
+ }
 }
