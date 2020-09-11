@@ -1,5 +1,8 @@
 class Collectable implements Pan{
-
-  void move(int yChange){}
+  PVector pos;
+  
+  void move(int yChange){
+    pos.y += yChange;
+  }
 
 }
