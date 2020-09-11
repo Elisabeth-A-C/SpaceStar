@@ -1,5 +1,9 @@
+import java.util.ArrayList;
+
 Pawn p; // for testing, not final solution  
-Platform pla; // for testing, not final solution  
+Platform pla; // for testing, not final solution
+
+ArrayList<Pan> pannedObjects = new ArrayList<Pan>();
 
 void setup() {
   fullScreen();
@@ -14,6 +18,10 @@ void draw() {
   //p.update();
   p.display();
   pla.render();
+  
+  for(Pan q : pannedObjects){
+    q.move(1);
+  }
 }
 
 
