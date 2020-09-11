@@ -94,4 +94,8 @@ class Pawn implements Pan {
     this.x += xChange ;
     this.y += yChange ;
   }
+
+  void jump() {
+    // TODO: implement this
+  }
 }
