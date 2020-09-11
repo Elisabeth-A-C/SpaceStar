@@ -1,13 +1,9 @@
 
-Pawn;
-
+Pawn p;
 
 void setup() {
-fullscreen;
-
+fullScreen();
 frameRate(60);
-
-
 p = new pawn();
 }
 
@@ -36,6 +32,4 @@ void launchGame() {
 void keyPressed() {
   // TODO: implement this
 
- 
-   
 }
