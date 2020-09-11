@@ -1,4 +1,4 @@
-class Pawn implements Pawn{
+class Pawn implements Pan{
 float w, h, x, y, vx, vy, 
 accelerationX, accelerationY,
 speedLimit;
@@ -19,7 +19,7 @@ Pawn(){
   y = 150;
   vx = 0;
   vy = 0;
-  acceletationX = 0;
+  accelerationX = 0;
   accelerationY = 0;
   speedLimit = 5;
   isOnGround = false;
@@ -31,54 +31,69 @@ Pawn(){
   gravity = 3;
   
   halfWidth = w/2;
-  halfHeight ) h/2;
+  halfHeight = h/2;
   
-  collisionSide = `` ´´;
+  //collisionSide;
 }
 
-}
-  void update(){
-    if (left && !right){
-    accelerationX = -0.2;
-  }
-   if (right && !left){
-    accelerationX = 0.2;
-  }
-   if (!left && !right){
-    accelerationX = 0;
-   }
-    if (up && !down){
-    accelerationY = -0.2;
-  }
-   if (down && !up){
-    accelerationY = 0.2;
-  }
-   if (!up && !down){
-    accelerationX = 0;  
- }
- vx += accelerationX;
- vy += accelerationY;
+ //TODO: implement this
+ // void update(){
+ //   if (left && !right){
+ //   accelerationX = -0.2;
+ // }
+ //  if (right && !left){
+ //   accelerationX = 0.2;
+ // }
+ //  if (!left && !right){
+ //   accelerationX = 0;
+ //  }
+ //   if (up && !down){
+ //   accelerationY = -0.2;
+ // }
+ //  if (down && !up){
+ //   accelerationY = 0.2;
+ // }
+ //  if (!up && !down){
+ //   accelerationX = 0;  
+ //}
+ //vx += accelerationX;
+ //vy += accelerationY;
  
- ////maximum hastigheder
- if (vx > speedLimit) { 
-   vx = speedLimit;
- }
-  if (vx < -speedLimit) { 
-   vx = -speedLimit;
- }
-  if (vy > speedLimit) { 
-   vy = speedLimit;
- }
-  if (vy < -speedLimit) { 
-   vy = -speedLimit;
- }
- ////ryk spilleren
- x+=vx;
- y+=vy;
- }
+ //////maximum hastigheder
+ //if (vx > speedLimit) { 
+ //  vx = speedLimit;
+ //}
+ // if (vx < -speedLimit) { 
+ //  vx = -speedLimit;
+ //}
+ // if (vy > speedLimit) { 
+ //  vy = speedLimit;
+ //}
+ // if (vy < -speedLimit) { 
+ //  vy = -speedLimit;
+ //}
+ //////ryk spilleren
+ //x+=vx;
+ //y+=vy;
+ //}
  
  void display(){
    fill(0, 255, 0, 128);
    rect(x, y, w, h);
  }
+ 
+ void render(){
+   this.display();
+ }
+ 
+   void move(int yChange) {
+    this.move(0, yChange);
+  }
+
+  void move(int xChange, int yChange) {
+    this.x += xChange ;
+    this.y += yChange ;
+  }
+ 
+ 
 }
