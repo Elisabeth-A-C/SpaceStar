@@ -40,7 +40,4 @@ class Platform implements Pan {
     }
   return false;
   }
-  
-  
-  
 }
