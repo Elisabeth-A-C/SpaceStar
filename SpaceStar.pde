@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+boolean gameRunning;
 
 Pawn p; // for testing, not final solution  
 Platform pla; // for testing, not final solution
@@ -11,6 +12,8 @@ void setup() {
   p = new Pawn();
   pla = new Platform();
   pla.move(400, 200);
+  pannedObjects.add(p);
+  pannedObjects.add(pla);
 }
 
 void draw() {
@@ -26,7 +29,16 @@ void draw() {
 
 
 void pause() {
-  // TODO: implement this
+  // pause is also resume
+
+  if (gameRunning) {
+    textSize(70);
+    text("GAME PAUSED", 200, 100 );
+    noLoop();
+  } else {
+    loop();
+  }
+  gameRunning = !gameRunning;
 }
 
 void restart() {
@@ -35,6 +47,7 @@ void restart() {
 
 void launchGame() {
   // TODO: implement this
+  gameRunning = true;
 }
 
 void keyPressed() {
