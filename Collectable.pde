@@ -15,6 +15,8 @@ class Collectable implements Pan {
   }
 
   void render() {
+    //TODO: implement this
+    
   }
 }
 

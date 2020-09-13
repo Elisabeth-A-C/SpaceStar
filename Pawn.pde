@@ -1,4 +1,6 @@
 class Pawn implements Pan {
+  //TODO: restructore, use PVectors, read and use NOC 2.2 and 2.3.
+  
   float w, h, x, y, vx, vy, 
     accelerationX, accelerationY, 
     speedLimit;
