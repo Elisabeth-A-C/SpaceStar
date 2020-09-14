@@ -50,11 +50,13 @@ void pause() {
 }
 
 void restart() {
+  loop();
   p.location = new PVector(round(0.25*width),round(0.15*height));
   p.velocity = new PVector(0,0);
   p.acceleration = new PVector (0,0);
   platforms.empty();
   platforms.addPlatform(round(0.2*width),round(0.2*height));
+  gameRunning = true;
 }
 
 void launchGame() {
