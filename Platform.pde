@@ -33,7 +33,7 @@ class Platform implements Pan {
   }
   
   boolean isStandingOn(Pawn star){
-    if(star.x >=this.pos.x && star.x <= this.pos.x + this.dimensions.y){
+    if(star.x >=this.pos.x-star.h-10 && star.x <= this.pos.x + this.dimensions.y+star.h+10){
       if(star.y + star.h >= this.pos.y -5 && star.y + star.h <= this.pos.y +5 ){
         return true;
       }
