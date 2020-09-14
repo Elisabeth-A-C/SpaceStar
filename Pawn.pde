@@ -114,8 +114,6 @@ class Pawn implements Pan {
   }
 
   void display() {
-    fill(0, 255, 0, 128);
-    rect(x, y, w, h);
     pushMatrix();
     translate(x, y);
     star(0, 0, 30, 70, 5); 
