@@ -27,6 +27,7 @@ void draw() {
   for (Pan q : pannedObjects) {
     q.move(1);
   }
+  deathScreen();
 }
 
 
@@ -67,3 +68,17 @@ void keyPressed() {
     }
   }
 }
+
+  boolean hasDied(Pawn star) {
+    return star.y > height;
+  }
+  
+  void deathScreen() {
+  if(hasDied(p) == true) {
+  background(255,0,0);
+  textSize(100);
+  text("Tought Luck.",0.34*width,0.45*height);
+  text("You Died.",0.38*width,0.55*height);
+  noLoop();
+    }
+  }
