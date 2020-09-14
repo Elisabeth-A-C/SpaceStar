@@ -1,11 +1,11 @@
 class Pawn implements Pan {
   //TODO: restructore, use PVectors, read and use NOC 2.2 and 2.3.
 
-  PVector location,velocity,acceleration;
-  
-  float w, h, x, y,
+  PVector location, velocity, acceleration;
+
+  float w, h, x, y, 
     speedLimit;
-  
+
   //verden variable
   float friction, bounce, gravity;
 
@@ -16,9 +16,9 @@ class Pawn implements Pan {
   String collisionSide;
 
   Pawn() {
-    location = new PVector(400,0);
-    velocity = new PVector (0,0);
-    acceleration = new PVector (0,0);
+    location = new PVector(400, 0);
+    velocity = new PVector (0, 0);
+    acceleration = new PVector (0, 0);
     w = 100; //140 original str
     h = 65; // 95 original str
     x = 400;
@@ -36,7 +36,10 @@ class Pawn implements Pan {
 
     //collisionSide;
   }
-
+   Pawn(PVector local) {
+   this();
+   location = local;
+   }
   //TODO: implement this
   // void update(){
   //   if (left && !right){
@@ -88,28 +91,46 @@ class Pawn implements Pan {
     velocity.add(acceleration);
     location.add(velocity);
     acceleration.mult(0);
-  this.x = location.x;
-  this.y = location.y;
+    this.x = location.x;
+    this.y = location.y;
   }
 
-  void accDown(Platform p) {
-  if(p.isStandingOn(this)) {
-    acceleration.mult(0);
-    velocity.mult(0);
-    isOnGround = true;
-  } else {
-    applyForce(new PVector(0,0.05));
-  }  
-  }
+  //void accDown(Platform p) {
+  //  // TODO: Make a array variant
+  //}
   
+  void accDown(Platform[] p) {
+    boolean gravityApplied = false;
+    if (isStaningOnPlatform(p)) {
+      acceleration.mult(0);
+      velocity.mult(0);
+      isOnGround = true;
+    }  
+    if ( isStaningOnPlatform(p) == false && gravityApplied == false) {
+      applyForce(new PVector(0, 0.05));
+      gravityApplied = true;
+    }
+  }
+
+  boolean isStaningOnPlatform(Platform[] inp) {
+
+    for (Platform q : inp) {
+      if (q.isStandingOn(this)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
   void userInput(char input) {
-      if (isOnGround && input == 'w' || input == 'W') {
-         isOnGround = false;
-      this.applyForce(new PVector(0,-5));
+    if (isOnGround && input == 'w' || input == 'W') {
+      isOnGround = false;
+      this.applyForce(new PVector(0, -5));
     } else if (input == 'a' || input == 'A') {
-      this.applyForce(new PVector(-0.5,0));
+      this.applyForce(new PVector(-0.5, 0));
     } else if (input == 'd' || input == 'D') {
-      this.applyForce(new PVector(0.5,0));
+      this.applyForce(new PVector(0.5, 0));
     }
   }
 
