@@ -1,10 +1,11 @@
 class Pawn implements Pan {
   //TODO: restructore, use PVectors, read and use NOC 2.2 and 2.3.
+  PVector location,velocity,acceleration;
   
   float w, h, x, y, vx, vy, 
     accelerationX, accelerationY, 
     speedLimit;
-
+  
   //verden variable
   float friction, bounce, gravity;
 
@@ -15,6 +16,9 @@ class Pawn implements Pan {
   String collisionSide;
 
   Pawn() {
+    location = new PVector(400,0);
+    velocity = new PVector(0,0);
+    acceleration = new PVector (0,0);
     w = 100; //140 original str
     h = 65; // 95 original str
     x = 400;
@@ -78,6 +82,40 @@ class Pawn implements Pan {
   //x+=vx;
   //y+=vy;
   //}
+
+  void applyForce(PVector force) {
+    acceleration.add(force);
+  }
+
+  void updateLocal() {
+    velocity.add(acceleration);
+    location.add(velocity);
+    acceleration.mult(0);
+  this.x = location.x;
+  this.y = location.y;
+  }
+
+  void accDown(Platform p) {
+  if(p.isStandingOn(this)) {
+    acceleration.mult(0);
+    velocity.mult(0);
+    println(true);
+    isOnGround = true;
+  } else {
+    applyForce(new PVector(0,0.05));
+  }  
+  }
+  
+  void userInput(char input) {
+      if (isOnGround && input == 'w' || input == 'W') {
+         isOnGround = false;
+      this.applyForce(new PVector(0,-5));
+    } else if (input == 'a' || input == 'A') {
+      this.applyForce(new PVector(-1,0));
+    } else if (input == 'd' || input == 'D') {
+      this.applyForce(new PVector(1,0));
+    }
+  }
 
   void display() {
     fill(0, 255, 0, 128);

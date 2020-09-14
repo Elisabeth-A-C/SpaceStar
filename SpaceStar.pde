@@ -19,9 +19,11 @@ void setup() {
 void draw() {
   background(255);
   //p.update();
-  p.display();
+  p.updateLocal();
+  p.accDown(pla);
   pla.render();
-
+  p.display();
+  
   for (Pan q : pannedObjects) {
     q.move(1);
   }
@@ -52,13 +54,8 @@ void launchGame() {
 
 void keyPressed() {
   if (keyPressed) {
-    if (key == 'w' || key == 'W') {
-      p.move(0, -height/300);
-    } else if (key == 'a' || key == 'A') {
-      p.move(-height/300, 0);
-    } else if (key == 'd' || key == 'D') {
-      p.move(height/300, 0);
-    } else if (key == ' ') {
+    p.userInput(key);
+  if (key == ' ') {
       pause();
     } else if (key == 'r') {
       restart();
