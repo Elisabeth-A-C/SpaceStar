@@ -2,6 +2,7 @@ class Pawn implements Pan {
   //TODO: restructore, use PVectors, read and use NOC 2.2 and 2.3.
 
   PVector location, velocity, acceleration;
+  color paint = color(250,218,94);
 
   float w, h, x, y, 
     speedLimit;
@@ -40,46 +41,6 @@ class Pawn implements Pan {
    this();
    location = local;
    }
-  //TODO: implement this
-  // void update(){
-  //   if (left && !right){
-  //   accelerationX = -0.2;
-  // }
-  //  if (right && !left){
-  //   accelerationX = 0.2;
-  // }
-  //  if (!left && !right){
-  //   accelerationX = 0;
-  //  }
-  //   if (up && !down){
-  //   accelerationY = -0.2;
-  // }
-  //  if (down && !up){
-  //   accelerationY = 0.2;
-  // }
-  //  if (!up && !down){
-  //   accelerationX = 0;  
-  //}
-  //vx += accelerationX;
-  //vy += accelerationY;
-
-  //////maximum hastigheder
-  //if (vx > speedLimit) { 
-  //  vx = speedLimit;
-  //}
-  // if (vx < -speedLimit) { 
-  //  vx = -speedLimit;
-  //}
-  // if (vy > speedLimit) { 
-  //  vy = speedLimit;
-  //}
-  // if (vy < -speedLimit) { 
-  //  vy = -speedLimit;
-  //}
-  //////ryk spilleren
-  //x+=vx;
-  //y+=vy;
-  //}
 
   void applyForce(PVector force) {
     acceleration.add(force);
@@ -137,6 +98,7 @@ class Pawn implements Pan {
   void display() {
     pushMatrix();
     translate(x, y);
+    fill(paint);//fill(240,240,0);
     star(0, 0, 30, 70, 5); 
     popMatrix();
   }

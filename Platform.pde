@@ -4,7 +4,7 @@ class Platform implements Pan {
   color paint;
 
   Platform() {
-    this.dimensions = new PVector(150, 50);
+    this.dimensions = new PVector(150, 25);
     this.pos = new PVector(0, 0);
   }
 

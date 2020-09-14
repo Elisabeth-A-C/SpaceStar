@@ -88,8 +88,8 @@ void keyPressed() {
   if(hasDied(p) == true) {
   background(255,0,0);
   textSize(100);
-  text("Tough Luck.",0.34*width,0.45*height);
-  text("You Died.",0.38*width,0.55*height);
+  text("Tough Luck",0.34*width,0.45*height);
+  text("You Died",0.37*width,0.55*height);
   noLoop();
     }
   }
