@@ -7,19 +7,24 @@ Pawn p; // for testing, not final solution
 PlatformSystem platforms;
 
 ArrayList<Pan> pannedObjects = new ArrayList<Pan>();
+Background[]dots = new Background[125];
 
 void setup() {
   fullScreen();
   frameRate(60);
   p = new Pawn(new PVector(round(0.25*width), round(0.12*height)));
   platforms = new PlatformSystem();
+  for(int i = 0; i<dots.length; i++){
+  dots[i] = new Background();
+  pannedObjects.add(dots [i]);
+  }
   pannedObjects.add(platforms);
   pannedObjects.add(p);
   platforms.addPlatform(round(0.2*width), round(0.2*height));
 }
 
 void draw() {
-  background(255);
+  background(#02043c);
   //p.update();
   p.updateLocal();
   if (frameCount %50 == 0) {
@@ -31,6 +36,9 @@ void draw() {
   for (Pan q : pannedObjects) {
     q.move(1);
     q.render();
+  }
+  for(int i = 0; i<dots.length; i++){
+  dots[i].outOfScreen();
   }
   deathScreen();
 

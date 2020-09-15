@@ -70,7 +70,6 @@ class Pawn implements Pan {
   void display() {
     pushMatrix();
     translate(x, y);
-    rotate(frameCount *-30);
     fill(paint);
     star(0, 0, 30, 70, 5); 
     popMatrix();
@@ -88,7 +87,7 @@ class Pawn implements Pan {
     this.x += xChange ;
     this.y += yChange ;
   }
-
+//star
   void star(float x, float y, float radius1, float radius2, int npoints) {
     float angle = TWO_PI / npoints;
     float halfAngle = angle/2;

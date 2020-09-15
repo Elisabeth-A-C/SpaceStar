@@ -6,6 +6,7 @@ class Platform implements Pan {
   Platform() {
     this.dimensions = new PVector(150, 25);
     this.pos = new PVector(0, 0);
+    paint = color(230);
   }
 
   Platform(int xPos, int yPos) {
@@ -37,7 +38,7 @@ class Platform implements Pan {
   }
 
   boolean isStandingOn(int centerX, int centerY, int radius) {
-    if (centerX - radius/2 >= this.pos.x && centerX<= this.pos.x + this.dimensions.x + radius/2) {
+    if (centerX + radius/2 >= this.pos.x && centerX<= this.pos.x + this.dimensions.x + radius/2) {
       if (centerY + radius >= this.pos.y - 10 && centerY + radius <= this.pos.y + 10 ) {
         return true;
       }
