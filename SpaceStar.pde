@@ -7,6 +7,7 @@ HighScore HS;
 Pawn p; // for testing, not final solution  
 // Platform pla; // for testing, not final solution
 PlatformSystem platforms;
+Collectable c;
 
 ArrayList<Pan> pannedObjects = new ArrayList<Pan>();
 
@@ -17,6 +18,7 @@ void setup() {
   platforms = new PlatformSystem();
   pannedObjects.add(platforms);
   pannedObjects.add(p);
+  pannedObjects.add(c);
   platforms.addPlatform(round(0.2*width), round(0.2*height));
   PFont f = createFont("Stencil", 100);
   textFont(f);

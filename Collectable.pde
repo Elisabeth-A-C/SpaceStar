@@ -1,3 +1,5 @@
+import java.util.Random;
+
 class Collectable implements Pan {
   PVector pos; // the center of the collectable
 
@@ -14,9 +16,17 @@ class Collectable implements Pan {
     return false;
   }
 
-  void render() {
-    //TODO: implement this
+  boolean isappearing() {
+    Random random = new Random();
+    return random.nextBoolean();
     
+  }
+  
+  void render() {
+    if (isappearing()) {
+      fill(255);
+      circle(width/2, height/2, width/300);
+    }
   }
 }
 
