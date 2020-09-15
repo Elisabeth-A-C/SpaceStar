@@ -50,11 +50,13 @@ void pause() {
 }
 
 void restart() {
+  loop();
   p.location = new PVector(round(0.25*width),round(0.15*height));
   p.velocity = new PVector(0,0);
   p.acceleration = new PVector (0,0);
   platforms.empty();
   platforms.addPlatform(round(0.2*width),round(0.2*height));
+  gameRunning = true;
 }
 
 void launchGame() {
@@ -86,8 +88,8 @@ void keyPressed() {
   if(hasDied(p) == true) {
   background(255,0,0);
   textSize(100);
-  text("Tough Luck.",0.34*width,0.45*height);
-  text("You Died.",0.38*width,0.55*height);
+  text("Tough Luck",0.34*width,0.45*height);
+  text("You Died",0.37*width,0.55*height);
   noLoop();
     }
   }
