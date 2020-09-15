@@ -12,9 +12,9 @@ class Platform implements Pan {
     this();
     this.pos = new PVector(xPos, yPos);
   }
-  
+
   Platform(int xPos, int yPos, color _paint) {
-    this(xPos,yPos );
+    this(xPos, yPos );
     this.paint = _paint;
   }
 
@@ -29,15 +29,19 @@ class Platform implements Pan {
 
   void render() {
     fill(paint);
-    rect(pos.x, pos.y,dimensions.x, dimensions.y);
+    rect(pos.x, pos.y, dimensions.x, dimensions.y, 8);
   }
-  
-  boolean isStandingOn(Pawn star){
-    if(star.x >=this.pos.x-star.h-10 && star.x <= this.pos.x + this.dimensions.y+star.h+10){
-      if(star.y + star.h >= this.pos.y -5 && star.y + star.h <= this.pos.y +5 ){
+
+  boolean isStandingOn(Pawn star) {
+    return isStandingOn(round(star.x), round(star.y), 50);
+  }
+
+  boolean isStandingOn(int centerX, int centerY, int radius) {
+    if (centerX - radius/2 >= this.pos.x && centerX<= this.pos.x + this.dimensions.x + radius/2) {
+      if (centerY + radius >= this.pos.y - 10 && centerY + radius <= this.pos.y + 10 ) {
         return true;
       }
     }
-  return false;
+    return false;
   }
 }
