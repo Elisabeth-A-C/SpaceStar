@@ -70,7 +70,6 @@ class Pawn implements Pan {
   void display() {
     pushMatrix();
     translate(x, y);
-    rotate(frameCount *-30);
     fill(paint);
     star(0, 0, 30, 70, 5); 
     popMatrix();
@@ -114,8 +113,7 @@ class Pawn implements Pan {
     return input;
     } else {
     return wrap(input);
-    } 
-
+    }
   }
 
 }
