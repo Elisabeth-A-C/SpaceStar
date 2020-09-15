@@ -54,6 +54,7 @@ class Pawn implements Pan {
     acceleration.mult(0);
     this.x = location.x;
     this.y = location.y;
+    location = wrap(location);
   }
 
   //void accDown(Platform p) {
@@ -98,7 +99,7 @@ class Pawn implements Pan {
   void display() {
     pushMatrix();
     translate(x, y);
-    fill(paint);//fill(240,240,0);
+    fill(paint);
     star(0, 0, 30, 70, 5); 
     popMatrix();
   }
@@ -122,9 +123,9 @@ class Pawn implements Pan {
 
   void star(float x, float y, float radius1, float radius2, int npoints) {
     float angle = TWO_PI / npoints;
-    float halfAngle = angle/2.0;
+    float halfAngle = angle/2;
     beginShape();
-    for (float a = 0; a < TWO_PI; a += angle) {
+    for (float a = 1; a < TWO_PI; a += angle) {
       float sx = x + cos(a) * radius2;
       float sy = y + sin(a) * radius2;
       vertex(sx, sy);
@@ -134,4 +135,18 @@ class Pawn implements Pan {
     }
     endShape(CLOSE);
   }
+  
+  PVector wrap(PVector input) {
+    if (input.x > width) {
+    input.x = input.x-width;
+    } else if (input.x < 0) {
+    input.x = input.x+width;
+    }
+    if (input.x < width && input.x > 0) {
+    return input;
+    } else {
+    return wrap(input);
+    } 
+  }
+  
 }

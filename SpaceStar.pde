@@ -10,7 +10,7 @@ ArrayList<Pan> pannedObjects = new ArrayList<Pan>();
 void setup() {
   fullScreen();
   frameRate(60);
-  p = new Pawn(new PVector(round(0.25*width),round(0.15*height)));
+  p = new Pawn(new PVector(round(0.24*width),round(0.15*height)));
   platforms = new PlatformSystem();
   pannedObjects.add(p);
   pannedObjects.add(platforms);
@@ -71,11 +71,6 @@ void keyPressed() {
       pause();
     } else if (key == 'r') {
       restart();
-
-      // mellemrum skal være her til pause
-      // s til nedad
-      // r til restart
-      // start ved hver en tast
     }
   }
 }
