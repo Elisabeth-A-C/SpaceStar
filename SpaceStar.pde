@@ -38,12 +38,12 @@ void draw() {
   deathScreen();
 }
 
-
 void pause() {
-  // pause is also resume
+  // Pause is also resume
 
   if (gameRunning) {
     textSize(70);
+    fill(#fc4103);
     text("GAME PAUSED", 200, 100 );
     noLoop();
   } else {
@@ -76,6 +76,7 @@ void keyPressed() {
       restart();
     }
   }
+  key ='o'; // control char, that should never be used.
 }
 
 boolean hasDied(Pawn star) {
@@ -84,7 +85,8 @@ boolean hasDied(Pawn star) {
 
 void deathScreen() {
   if (hasDied(p) == true) {
-    background(255, 0, 0);
+    fill(#ff0000);
+    background(0);
     textSize(100);
     text("Tough Luck", 0.34*width, 0.45*height);
     text("You Died", 0.37*width, 0.55*height);
