@@ -16,6 +16,8 @@ void setup() {
   pannedObjects.add(platforms);
   pannedObjects.add(p);
   platforms.addPlatform(round(0.2*width), round(0.2*height));
+  PFont f = createFont("Stencil",100);
+  textFont(f);
 }
 
 void draw() {
@@ -102,7 +104,7 @@ void deathScreen() {
     background(0);
     textSize(100);
     text("Tough Luck", 0.34*width, 0.45*height);
-    text("You Died", 0.37*width, 0.55*height);
+    text("You Died", 0.38*width, 0.55*height);
     noLoop();
   }
 }
