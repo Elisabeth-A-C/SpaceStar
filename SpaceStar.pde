@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 boolean gameRunning;
+boolean displayStartScreen = true;
 
 Pawn p; // for testing, not final solution  
 // Platform pla; // for testing, not final solution
 PlatformSystem platforms;
-Pawn testPawn;
 
 ArrayList<Pan> pannedObjects = new ArrayList<Pan>();
 
@@ -12,7 +12,6 @@ void setup() {
   fullScreen();
   frameRate(60);
   p = new Pawn(new PVector(round(0.25*width), round(0.12*height)));
-  testPawn = new Pawn(new PVector(0, 0));
   platforms = new PlatformSystem();
   pannedObjects.add(platforms);
   pannedObjects.add(p);
@@ -26,16 +25,18 @@ void draw() {
   if (frameCount %50 == 0) {
     platforms.addPlatform();
   }
-  testPawn.render();
 
   p.accDown(platforms.PlatformList.toArray(new Platform[0]));
-
 
   for (Pan q : pannedObjects) {
     q.move(1);
     q.render();
   }
   deathScreen();
+
+  if (displayStartScreen) {
+    launchGame();
+  }
 }
 
 void pause() {
@@ -64,7 +65,18 @@ void restart() {
 
 void launchGame() {
   // TODO: implement this
-  gameRunning = true;
+  //gameRunning = true;
+  background(#0000ff);
+  textSize(100);
+  fill(240);
+  textSize(100);
+  text("SpaceSTAR", 0.34*width, 0.45*height);
+  text("Press any key to Start", 0.25*width, 0.55*height);
+
+  if (keyPressed) {
+    displayStartScreen = false;
+    restart();
+  }
 }
 
 void keyPressed() {
@@ -76,6 +88,7 @@ void keyPressed() {
       restart();
     }
   }
+
   key ='o'; // control char, that should never be used.
 }
 
