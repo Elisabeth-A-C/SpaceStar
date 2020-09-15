@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 boolean gameRunning;
 boolean displayStartScreen = true;
+HighScore HS;
+
 
 Pawn p; // for testing, not final solution  
 // Platform pla; // for testing, not final solution
@@ -16,8 +18,9 @@ void setup() {
   pannedObjects.add(platforms);
   pannedObjects.add(p);
   platforms.addPlatform(round(0.2*width), round(0.2*height));
-  PFont f = createFont("Stencil",100);
+  PFont f = createFont("Stencil", 100);
   textFont(f);
+  HS = new HighScore();
 }
 
 void draw() {
@@ -39,6 +42,7 @@ void draw() {
   if (displayStartScreen) {
     launchGame();
   }
+//  HS.render();
 }
 
 void pause() {
