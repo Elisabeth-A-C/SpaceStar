@@ -17,6 +17,6 @@
   }
   
   void keep(String[] output) {
-    saveStrings("highScores.txt", newStr);
+    saveStrings("highScores.txt", output);
   }
 }
