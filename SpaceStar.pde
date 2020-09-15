@@ -74,11 +74,6 @@ void keyPressed() {
       pause();
     } else if (key == 'r') {
       restart();
-
-      // mellemrum skal være her til pause
-      // s til nedad
-      // r til restart
-      // start ved hver en tast
     }
   }
 }
