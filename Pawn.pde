@@ -42,8 +42,8 @@ class Pawn implements Pan {
   }
 
   void updateLocal() {
-    velocity.limit(5);
-    acceleration.limit(5);
+ //   velocity.limit(5);
+   // acceleration.limit(5);
     velocity.add(acceleration);
     location.add(velocity);
     acceleration.mult(0);
@@ -92,6 +92,7 @@ class Pawn implements Pan {
   void display() {
     pushMatrix();
     translate(x, y);
+    rotate(frameCount *-30);
     fill(paint);
     star(0, 0, 30, 70, 5); 
     popMatrix();
@@ -130,16 +131,15 @@ class Pawn implements Pan {
   }
   
   PVector wrap(PVector input) {
-    if (input.x > width) {
+    if (input.x >= width) {
     input.x = input.x-width;
-    } else if (input.x < 0) {
+    } else if (input.x <= 0) {
     input.x = input.x+width;
     }
-    if (input.x < width && input.x > 0) {
+    if (input.x <= width && input.x >= 0) {
     return input;
     } else {
     return wrap(input);
     } 
   }
-  
 }
