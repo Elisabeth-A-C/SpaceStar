@@ -57,7 +57,7 @@ class Pawn implements Pan {
   }
 
   void userInput(char input) {
-    if (isOnGround && input == 'w' || input == 'W') {
+    if (isOnGround && (input == 'w' || input == 'W')) {
       isOnGround = false;
       this.applyForce(new PVector(0, -5));
     } else if (input == 'a' || input == 'A') {

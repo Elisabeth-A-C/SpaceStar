@@ -62,7 +62,7 @@ void pause() {
   if (gameRunning) {
     textSize(70);
     fill(#fc4103);
-    text("GAME PAUSED", 200, 100 );
+    text("GAME PAUSED", 200, 100);
     noLoop();
   } else {
     loop();
@@ -88,7 +88,7 @@ void launchGame() {
   fill(240);
   textSize(100);
   text("SpaceSTAR", 0.34*width, 0.45*height);
-  text("Press any key to Start", 0.25*width, 0.55*height);
+  text("Press any key to Start", 0.17*width, 0.55*height);
 
   if (keyPressed) {
     displayStartScreen = false;
@@ -103,6 +103,8 @@ void keyPressed() {
       pause();
     } else if (key == 'r') {
       restart();
+    } else if (key == ESC) {
+    exit();
     }
   }
 

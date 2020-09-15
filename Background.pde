@@ -19,7 +19,7 @@ class Background extends Platform implements Pan {
   }
 
   Background() {
-    pos = new PVector(random ( width), random(height));
+    pos = new PVector(random (width), random(height));
     size = round(random(3, 11));
   }
 
