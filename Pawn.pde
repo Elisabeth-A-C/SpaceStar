@@ -118,7 +118,7 @@ class Pawn implements Pan {
     float angle = TWO_PI / npoints;
     float halfAngle = angle/2;
     beginShape();
-    for (float a = 1; a < TWO_PI; a += angle) {
+    for (float a = 0.966644; a < TWO_PI; a += angle) {
       float sx = x + cos(a) * radius2;
       float sy = y + sin(a) * radius2;
       vertex(sx, sy);
