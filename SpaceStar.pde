@@ -5,7 +5,7 @@ boolean displayStartScreen = true;
 Pawn p; // for testing, not final solution  
 // Platform pla; // for testing, not final solution
 PlatformSystem platforms;
-Collectable c;
+Collectable item;
 
 ArrayList<Pan> pannedObjects = new ArrayList<Pan>();
 
@@ -14,11 +14,12 @@ void setup() {
   frameRate(60);
   p = new Pawn(new PVector(round(0.25*width), round(0.12*height)));
   platforms = new PlatformSystem();
+  item = new Collectable(new PVector(200, 200));
   pannedObjects.add(platforms);
   pannedObjects.add(p);
-  pannedObjects.add(c);
+  pannedObjects.add(item);
   platforms.addPlatform(round(0.2*width), round(0.2*height));
-  PFont f = createFont("Stencil",100);
+  PFont f = createFont("Stencil", 100);
   textFont(f);
 }
 
