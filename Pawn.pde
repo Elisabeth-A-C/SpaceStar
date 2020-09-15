@@ -1,11 +1,10 @@
 class Pawn implements Pan {
-  //TODO: restructore, use PVectors, read and use NOC 2.2 and 2.3.
 
-  PVector location, velocity, acceleration;
+  PVector location, velocity, acceleration; // location is based on the center of the star
   color paint = color(250,218,94);
 
   float w, h, x, y, 
-    speedLimit;
+  speedLimit;
 
   //verden variable
   float friction, bounce, gravity;
@@ -20,10 +19,6 @@ class Pawn implements Pan {
     location = new PVector(400, 0);
     velocity = new PVector (0, 0);
     acceleration = new PVector (0, 0);
-    w = 100; //140 original str
-    h = 65; // 95 original str
-    x = 400;
-    y = 150;
     isOnGround = false;
     jumpForce = -10;
 
@@ -74,7 +69,6 @@ class Pawn implements Pan {
   }
 
   boolean isStaningOnPlatform(Platform[] inp) {
-
     for (Platform q : inp) {
       if (q.isStandingOn(this)) {
         return true;
@@ -82,7 +76,6 @@ class Pawn implements Pan {
     }
     return false;
   }
-
 
   void userInput(char input) {
     if (isOnGround && input == 'w' || input == 'W') {
