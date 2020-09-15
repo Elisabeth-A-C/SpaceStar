@@ -54,17 +54,6 @@ class HighScore {
     sortScoreBoard();
   }
 
-<<<<<<< Updated upstream
-  //String usernameInput() {
-  //  String temp = new String();
-  //  key = '+';
-  //  if (key != '+') {
-  //    usernameInput = input("Enter username:");
-  //    print("Username is: " + usernameInput);
-  //  }
-
-  //}
-=======
   String usernameInput() {
     String temp = new String();
     key = '+';
@@ -72,5 +61,4 @@ class HighScore {
     }
     return temp;
   }
->>>>>>> Stashed changes
 }
