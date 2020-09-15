@@ -4,30 +4,33 @@ boolean gameRunning;
 Pawn p; // for testing, not final solution  
 // Platform pla; // for testing, not final solution
 PlatformSystem platforms;
+Pawn testPawn;
 
 ArrayList<Pan> pannedObjects = new ArrayList<Pan>();
 
 void setup() {
   fullScreen();
   frameRate(60);
-  p = new Pawn(new PVector(round(0.25*width),round(0.15*height)));
+  p = new Pawn(new PVector(round(0.25*width), round(0.12*height)));
+  testPawn = new Pawn(new PVector(0, 0));
   platforms = new PlatformSystem();
-  pannedObjects.add(p);
   pannedObjects.add(platforms);
-  platforms.addPlatform(round(0.2*width),round(0.2*height));
+  pannedObjects.add(p);
+  platforms.addPlatform(round(0.2*width), round(0.2*height));
 }
 
 void draw() {
   background(255);
   //p.update();
   p.updateLocal();
-  if(frameCount %50 == 0) {
-  platforms.addPlatform();
+  if (frameCount %50 == 0) {
+    platforms.addPlatform();
   }
-  
+  testPawn.render();
+
   p.accDown(platforms.PlatformList.toArray(new Platform[0]));
 
-  
+
   for (Pan q : pannedObjects) {
     q.move(1);
     q.render();
@@ -51,11 +54,11 @@ void pause() {
 
 void restart() {
   loop();
-  p.location = new PVector(round(0.25*width),round(0.15*height));
-  p.velocity = new PVector(0,0);
-  p.acceleration = new PVector (0,0);
+  p.location = new PVector(round(0.25*width), round(0.15*height));
+  p.velocity = new PVector(0, 0);
+  p.acceleration = new PVector (0, 0);
   platforms.empty();
-  platforms.addPlatform(round(0.2*width),round(0.2*height));
+  platforms.addPlatform(round(0.2*width), round(0.2*height));
   gameRunning = true;
 }
 
@@ -67,7 +70,7 @@ void launchGame() {
 void keyPressed() {
   if (keyPressed) {
     p.userInput(key);
-  if (key == ' ') {
+    if (key == ' ') {
       pause();
     } else if (key == 'r') {
       restart();
@@ -80,16 +83,16 @@ void keyPressed() {
   }
 }
 
-  boolean hasDied(Pawn star) {
-    return star.y > height;
+boolean hasDied(Pawn star) {
+  return star.y > height;
+}
+
+void deathScreen() {
+  if (hasDied(p) == true) {
+    background(255, 0, 0);
+    textSize(100);
+    text("Tough Luck", 0.34*width, 0.45*height);
+    text("You Died", 0.37*width, 0.55*height);
+    noLoop();
   }
-  
-  void deathScreen() {
-  if(hasDied(p) == true) {
-  background(255,0,0);
-  textSize(100);
-  text("Tough Luck",0.34*width,0.45*height);
-  text("You Died",0.37*width,0.55*height);
-  noLoop();
-    }
-  }
+}
