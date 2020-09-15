@@ -3,35 +3,17 @@ class Pawn implements Pan {
   PVector location, velocity, acceleration; // location is based on the center of the star
   color paint = color(250,218,94);
 
-  float w, h, x, y, 
-  speedLimit;
-
-  //verden variable
-  float friction, bounce, gravity;
+  float x, y, speedLimit;
 
   boolean isOnGround;
-  float jumpForce;
-
-  float halfWidth, halfHeight;
-  String collisionSide;
 
   Pawn() {
-    location = new PVector(400, 0);
+    location = new PVector(0, 0);
     velocity = new PVector (0, 0);
     acceleration = new PVector (0, 0);
     isOnGround = false;
-    jumpForce = -10;
-
-    // verden værdier
-    friction = 0.96;
-    bounce = -0.7;
-    gravity = 3;
-
-    halfWidth = w/2;
-    halfHeight = h/2;
-
-    //collisionSide;
   }
+  
    Pawn(PVector local) {
    this();
    location = local;
@@ -51,10 +33,6 @@ class Pawn implements Pan {
     this.y = location.y;
     location = wrap(location);
   }
-
-  //void accDown(Platform p) {
-  //  // TODO: Make a array variant
-  //}
   
   void accDown(Platform[] p) {
     boolean gravityApplied = false;
@@ -63,7 +41,7 @@ class Pawn implements Pan {
       velocity.mult(0);
       isOnGround = true;
     }  
-    if ( isStaningOnPlatform(p) == false && gravityApplied == false) {
+    if (isStaningOnPlatform(p) == false && gravityApplied == false) {
       applyForce(new PVector(0, 0.05));
       gravityApplied = true;
     }
@@ -110,10 +88,6 @@ class Pawn implements Pan {
     this.y += yChange ;
   }
 
-  void jump() {
-    // TODO: implement this
-  }
-
   void star(float x, float y, float radius1, float radius2, int npoints) {
     float angle = TWO_PI / npoints;
     float halfAngle = angle/2;
@@ -140,6 +114,5 @@ class Pawn implements Pan {
     } else {
     return wrap(input);
     } 
-  }
-  
+  } 
 }
