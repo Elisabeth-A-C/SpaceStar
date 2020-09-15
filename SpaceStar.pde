@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 boolean gameRunning;
 boolean displayStartScreen = true;
+HighScore HS;
+
 
 Pawn p; // for testing, not final solution  
 // Platform pla; // for testing, not final solution
 PlatformSystem platforms;
+Collectable item;
 
 ArrayList<Pan> pannedObjects = new ArrayList<Pan>();
 Background[]dots = new Background[125];
@@ -15,12 +18,17 @@ void setup() {
   p = new Pawn(new PVector(round(0.25*width), round(0.12*height)));
   platforms = new PlatformSystem();
   for(int i = 0; i<dots.length; i++){
-  dots[i] = new Background();
-  pannedObjects.add(dots [i]);
+    dots[i] = new Background();
+    pannedObjects.add(dots [i]);
   }
+  item = new Collectable(new PVector(200, 200));
   pannedObjects.add(platforms);
   pannedObjects.add(p);
+  pannedObjects.add(item);
   platforms.addPlatform(round(0.2*width), round(0.2*height));
+  PFont f = createFont("Stencil", 100);
+  textFont(f);
+  HS = new HighScore();
 }
 
 void draw() {
@@ -45,6 +53,7 @@ void draw() {
   if (displayStartScreen) {
     launchGame();
   }
+//  HS.render();
 }
 
 void pause() {
@@ -110,7 +119,7 @@ void deathScreen() {
     background(0);
     textSize(100);
     text("Tough Luck", 0.34*width, 0.45*height);
-    text("You Died", 0.37*width, 0.55*height);
+    text("You Died", 0.38*width, 0.55*height);
     noLoop();
   }
 }

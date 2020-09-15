@@ -113,8 +113,7 @@ class Pawn implements Pan {
     return input;
     } else {
     return wrap(input);
-    } 
-
+    }
   }
 
 }

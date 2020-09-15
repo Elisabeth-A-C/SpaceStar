@@ -1,10 +1,17 @@
+import java.util.Random;
+
 class Collectable implements Pan {
   PVector pos; // the center of the collectable
+
+  Collectable(PVector _pos){
+    pos = _pos;
+  }
+  Collectable(){}
+
 
   void move(int yChange) {
     pos.y += yChange;
   }
-
 
   boolean istouching(Pawn star) {
     float radius = 20;
@@ -14,12 +21,19 @@ class Collectable implements Pan {
     return false;
   }
 
-  void render() {
-    //TODO: implement this
+  boolean isappearing() {
+    Random random = new Random();
+    return random.nextBoolean();
     
   }
+  
+  void render() {
+    if (isappearing()) {
+      fill(255);
+      circle(pos.x, pos.y, 10);
+    }
+  }
 }
-
 
 class Coin extends Collectable {
 }
