@@ -22,7 +22,6 @@ class Collectable implements Pan {
     return false;
   }
 
-<<<<<<< Updated upstream
   void powerup()  {
     //empty on purpose
   }
@@ -33,12 +32,6 @@ class Collectable implements Pan {
 
   void collectPower(Pawn star) {
     // empty on purpose
-=======
-  boolean isappearing() {
-    Random random = new Random();
-    return random.nextBoolean();
-    
->>>>>>> Stashed changes
   }
   
   void render() {
@@ -46,6 +39,17 @@ class Collectable implements Pan {
       fill(255);
       circle(width/2, height/2, width/300);
     }
+  }
+  
+  void stopExisting()  {
+    //TODO implement this
+  }
+  
+  void applyPowerup(Pawn star) {
+    if (isthouching) {
+      powerup(star);
+      stopExisting();
+    }  
   }
 }
 
@@ -84,6 +88,7 @@ class Doublejump extends Collectable {
   }
   
   void powerup(Pawn star) {
+    //TODO implement this
     //Man skal få et doppelthop når stjernen får denne collectable
   }
 }
@@ -109,6 +114,6 @@ class Higherjump extends Collectable {
   }
   
   void powerup(Pawn star){
-    //stjernen skal kunne hoppe højere
+    star.jumpScalar = 7
   }
 }
