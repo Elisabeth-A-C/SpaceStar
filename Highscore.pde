@@ -1,5 +1,6 @@
 class HighScore {
   // skal være: render; save; load; write highscore; determine highscore; username input
+  // format is "AAA   000"
   String[] scores = new String[10];
 
   HighScore() {
@@ -31,7 +32,6 @@ class HighScore {
 
   void keep(String[] output) {
     saveStrings("highScores.txt", output);
-
   }
 
   String addZeroes(int input) {
@@ -56,9 +56,11 @@ class HighScore {
 
   String usernameInput() {
     String temp = new String();
-    key = '+';
-    if (key != '+') {
-    }
     return temp;
   }
+
+  int extractScore(String input) {
+    return Integer.parseInt(input.substring(6,9));
+  } 
+  
 }

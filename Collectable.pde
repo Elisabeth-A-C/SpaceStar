@@ -3,10 +3,11 @@ import java.util.Random;
 class Collectable implements Pan {
   PVector pos; // the center of the collectable
 
-  Collectable(PVector _pos){
+  Collectable(PVector _pos) {
     pos = _pos;
   }
-  Collectable(){}
+  Collectable() {
+  }
 
 
   void move(int yChange) {
@@ -21,21 +22,16 @@ class Collectable implements Pan {
     return false;
   }
 
-  boolean isappearing() {
-    Random random = new Random();
-    return random.nextBoolean();
-  
-  }
-
   void powerup()  {
     //empty on purpose
   }
-  
+
   void render() {
-    if (isappearing()) {
-      fill(255);
-      circle(pos.x, pos.y, 10);
-    }
+    //empty on purpose
+  }
+
+  void collectPower(Pawn star) {
+    // empty on purpose
   }
 }
 
