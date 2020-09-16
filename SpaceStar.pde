@@ -91,7 +91,7 @@ void restart() {
 
 void launchGame() {
   //gameRunning = true;
-  background(#0000ff);
+  background(#2CDBBE);
   fill(240);
   textSize(width*0.05);
   text("SpaceSTAR", 0.355*width, 0.45*height);
