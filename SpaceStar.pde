@@ -14,10 +14,10 @@ Background[]dots = new Background[125];
 
 void setup() {
   fullScreen();
-  frameRate(60);
+  frameRate(60);  
   p = new Pawn(new PVector(round(0.25*width), round(0.12*height)));
   platforms = new PlatformSystem();
-  for(int i = 0; i<dots.length; i++){
+  for (int i = 0; i<dots.length; i++) {
     dots[i] = new Background();
     pannedObjects.add(dots [i]);
   }
@@ -29,6 +29,8 @@ void setup() {
   PFont f = createFont("Stencil", 100);
   textFont(f);
   HS = new HighScore();
+ 
+  
 }
 
 void draw() {
@@ -37,25 +39,25 @@ void draw() {
   p.updateLocal();
   if (frameCount %80 == 0) { // 80 is better.
     platforms.addPlatform(platforms.getNewestPlatform());
-    
   }
 
   p.accDown(platforms.PlatformList.toArray(new Platform[0]));
 
   for (Pan q : pannedObjects) {
-    q.move(1+floor(1*pow(frameCount/1000,2)));
+    q.move(1+floor(1*pow(frameCount/1000, 2)));
     q.render();
   }
-  for(int i = 0; i<dots.length; i++){
-  dots[i].outOfScreen();
+  for (int i = 0; i<dots.length; i++) {
+    dots[i].outOfScreen();
   }
   deathScreen();
+
   displayHighScore();
 
   if (displayStartScreen) {
     launchGame();
   }
-//  HS.render();
+  //  HS.render();
 }
 
 void pause() {
@@ -84,7 +86,6 @@ void restart() {
 }
 
 void launchGame() {
-  //gameRunning = true;
   background(#0000ff);
   fill(240);
   textSize(width*0.05);
@@ -97,24 +98,25 @@ void launchGame() {
   }
 }
 
-  void displayHighScore(){
-    // TODO
-    
-    
-    displayHS = !displayHS;
+void displayHighScore() {
+  if (displayHS) {
+    HS.render();
+    noLoop();  
   }
+}
 
 void keyPressed() {
-    p.userInput(key);
-    if (key == ' ') {
-      pause();
-    } else if (key == 'r') {
-      restart();
-    } else if(key == 'h'){
-      displayHighScore();
-    }else if (key == ESC) {
+  p.userInput(key);
+  if (key == ' ') {
+    pause();
+  } else if (key == 'r') {
+    restart();
+  } else if (key == 'h') {
+    displayHS = !displayHS;
+    loop();
+  } else if (key == ESC) {
     exit();
-    }
+  }
 
   key ='o'; // control char, that should never be used.
 }

@@ -18,8 +18,6 @@ class PlatformSystem implements Pan {
     Platform temp;
     PVector pos = wrap(new PVector(round(random(-0.25 * width + previous.pos.x, 0.25 * width+ previous.pos.x)), 0));
     temp = new Platform(pos);
-    
-    println(previous.pos.x);
     PlatformList.add(temp);
   }
 

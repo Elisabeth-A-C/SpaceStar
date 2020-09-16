@@ -32,7 +32,6 @@ class HighScore {
 
   void keep(String[] output) {
     saveStrings("highScores.txt", output);
-
   }
 
   String addZeroes(int input) {
@@ -59,10 +58,9 @@ class HighScore {
     String temp = new String();
     return temp;
   }
- 
-  int extractScore(String input){
-  return 4;
-  
-  } 
+
+  int extractScore(String input) {
+    return Integer.parseInt(input.substring(6,9));
+  }
   
 }
