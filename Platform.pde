@@ -13,6 +13,11 @@ class Platform implements Pan {
     this();
     this.pos = new PVector(xPos, yPos);
   }
+  
+  Platform(PVector _pos){
+    this();
+    this.pos = _pos;
+  }
 
   Platform(int xPos, int yPos, color _paint) {
     this(xPos, yPos );
