@@ -22,6 +22,7 @@ class Collectable implements Pan {
     return false;
   }
 
+<<<<<<< Updated upstream
   void powerup()  {
     //empty on purpose
   }
@@ -32,6 +33,19 @@ class Collectable implements Pan {
 
   void collectPower(Pawn star) {
     // empty on purpose
+=======
+  boolean isappearing() {
+    Random random = new Random();
+    return random.nextBoolean();
+    
+>>>>>>> Stashed changes
+  }
+  
+  void render() {
+    if (isappearing()) {
+      fill(255);
+      circle(width/2, height/2, width/300);
+    }
   }
 }
 
