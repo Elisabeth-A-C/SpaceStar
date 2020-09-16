@@ -60,8 +60,8 @@ class HighScore {
     return temp;
   }
  
-  int extractScore(){
-  
+  int extractScore(String input){
+  return 4;
   
   } 
   
