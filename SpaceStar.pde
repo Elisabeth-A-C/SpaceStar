@@ -9,11 +9,7 @@ StarBand SB;
 
 Pawn p;
 PlatformSystem platforms;
-<<<<<<< Updated upstream
 Collectable item;
-=======
-Collectable c;
->>>>>>> Stashed changes
 
 ArrayList<Pan> pannedObjects = new ArrayList<Pan>();
 Background[]dots = new Background[125];
@@ -32,15 +28,10 @@ void setup() {
   pannedObjects.add(SB);
   pannedObjects.add(platforms);
   pannedObjects.add(p);
-<<<<<<< Updated upstream
   pannedObjects.add(item);
   platforms.addPlatform(round(0.47*width), round(0.3*height));
   PFont f = createFont("Stencil", 100);
-=======
-  pannedObjects.add(c);
-  platforms.addPlatform(round(0.2*width), round(0.2*height));
-  PFont f = createFont("Stencil",100);
->>>>>>> Stashed changes
+  // platforms.addPlatform(round(0.2*width), round(0.2*height));
   textFont(f);
   HS = new HighScore();
  
