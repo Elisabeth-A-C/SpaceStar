@@ -1,12 +1,9 @@
 class Pawn implements Pan {
   PVector location, velocity, acceleration; // location is based on the center of the star
   color paint = color(250, 218, 94);
-<<<<<<< HEAD
 
-=======
->>>>>>> e0b9817b5e53e98cbb90b78332bca481bd0b72de
   float x, y, speedLimit;
-  float jumpScalar =5;
+  float jumpScalar = 5;
 
   boolean isOnGround;
 
@@ -27,11 +24,6 @@ class Pawn implements Pan {
   }
 
   void updateLocal() {
-<<<<<<< HEAD
-    //   velocity.limit(5);
-    // acceleration.limit(5);
-=======
->>>>>>> e0b9817b5e53e98cbb90b78332bca481bd0b72de
     velocity.add(acceleration);
     location.add(velocity);
     acceleration.mult(0);
@@ -103,10 +95,7 @@ class Pawn implements Pan {
     this.x += xChange ;
     this.y += yChange ;
   }
-<<<<<<< HEAD
-=======
 
->>>>>>> e0b9817b5e53e98cbb90b78332bca481bd0b72de
   //star
   void star(float x, float y, float radius1, float radius2, int npoints) {
     float angle = TWO_PI / npoints;
