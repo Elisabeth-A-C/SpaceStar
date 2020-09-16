@@ -8,7 +8,7 @@ class HighScore {
 
   void render() {
     background(0);
-    fill(12, 184, 252);
+    fill(12, 184, 252);  
     textSize(40);
     stroke(0);
     text("HighScore", 0.425*width, 0.35*height);

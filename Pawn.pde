@@ -1,8 +1,9 @@
 class Pawn implements Pan {
   PVector location, velocity, acceleration; // location is based on the center of the star
   color paint = color(250, 218, 94);
+
   float x, y, speedLimit;
-  float jumpScalar =5;
+  float jumpScalar = 5;
 
   boolean isOnGround;
 

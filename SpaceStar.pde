@@ -5,8 +5,7 @@ boolean displayHS = false;
 HighScore HS;
 
 
-Pawn p; // for testing, not final solution  
-// Platform pla; // for testing, not final solution
+Pawn p;
 PlatformSystem platforms;
 Collectable item;
 
@@ -44,7 +43,7 @@ void draw() {
   p.accDown(platforms.PlatformList.toArray(new Platform[0]));
 
   for (Pan q : pannedObjects) {
-    q.move(1);
+    q.move(1+floor(1*pow(frameCount/1000,2)));
     q.render();
   }
   for(int i = 0; i<dots.length; i++){
@@ -63,9 +62,9 @@ void pause() {
   // Pause is also resume
 
   if (gameRunning) {
-    textSize(70);
+    textSize(width*0.05);
     fill(#fc4103);
-    text("GAME PAUSED", 200, 100);
+    text("GAME PAUSED", width*0.05, width*0.08);
     noLoop();
   } else {
     loop();
@@ -75,22 +74,22 @@ void pause() {
 
 void restart() {
   loop();
-  p.location = new PVector(round(0.25*width), round(0.15*height));
+  p.location = new PVector(round(0.25*width), round(0.12*height));
   p.velocity = new PVector(0, 0);
   p.acceleration = new PVector (0, 0);
   platforms.empty();
   platforms.addPlatform(round(0.2*width), round(0.2*height));
   gameRunning = true;
+  frameCount = 0;
 }
 
 void launchGame() {
   //gameRunning = true;
   background(#0000ff);
-  textSize(100);
   fill(240);
-  textSize(100);
-  text("SpaceSTAR", 0.34*width, 0.45*height);
-  text("Press any key to Start", 0.17*width, 0.55*height);
+  textSize(width*0.05);
+  text("SpaceSTAR", 0.355*width, 0.45*height);
+  text("Press any key to Start", 0.20*width, 0.55*height);
 
   if (keyPressed) {
     displayStartScreen = false;
@@ -106,7 +105,6 @@ void launchGame() {
   }
 
 void keyPressed() {
-  if (keyPressed) {
     p.userInput(key);
     if (key == ' ') {
       pause();
@@ -117,7 +115,6 @@ void keyPressed() {
     }else if (key == ESC) {
     exit();
     }
-  }
 
   key ='o'; // control char, that should never be used.
 }
@@ -127,12 +124,12 @@ boolean hasDied(Pawn star) {
 }
 
 void deathScreen() {
-  if (hasDied(p) == true) {
+  if (hasDied(p)) {
     fill(#ff0000);
     background(0);
-    textSize(100);
-    text("Tough Luck", 0.34*width, 0.45*height);
-    text("You Died", 0.38*width, 0.55*height);
+    textSize(width*0.06);
+    text("Tough Luck", 0.31*width, 0.45*height);
+    text("You Died", 0.36*width, 0.55*height);
     noLoop();
   }
 }
