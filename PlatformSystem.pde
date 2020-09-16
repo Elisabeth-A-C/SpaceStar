@@ -14,9 +14,16 @@ class PlatformSystem implements Pan {
     PlatformList.add(new Platform(round(random(width)), 0));
   }
 
-  void addPlatform(Platform next) {
-    PlatformList.add(next);
+  void addPlatform(Platform previous) {
+    Platform temp = new Platform(round(random(-0.25 * width + previous.pos.x, 0.25 * width+ previous.pos.x)), 0);
+    println(previous.pos.x);
+    PlatformList.add(temp);
   }
+  
+  Platform getNewestPlatform(){
+    return PlatformList.get(PlatformList.size()-1);
+  }
+
   void addPlatform(int x, int y) {
     PlatformList.add(new Platform(x, y));
   }
