@@ -1,12 +1,12 @@
-class HighScore {
+static class HighScore {
   // skal være: render; save; load; write highscore; determine highscore; username input
-  String[] scores = new String[10];
-
+  static String[] scores = new String[10];
+  
   HighScore() {
     fetch();
   }
 
-  void render() {
+ static void render() {
     background(0);
     fill(12, 184, 252);
     textSize(40);
@@ -17,24 +17,23 @@ class HighScore {
     }
   } 
 
-  void fetch() {
+  static void fetch() {
     scores = loadStrings("highScores.txt");
   }
 
-  void changeListLast(String newStr) {
+  static void changeListLast(String newStr) {
     scores[scores.length-1] = newStr;
   }
 
-  void sortScoreBoard() {
+  static void sortScoreBoard() {
     scores = sort(scores);
   }
 
-  void keep(String[] output) {
+  static void keep(String[] output) {
     saveStrings("highScores.txt", output);
-
   }
 
-  String addZeroes(int input) {
+  static String addZeroes(int input) {
     // no numbers above 999
     if (input >= 1000) {
       return "error";
@@ -49,12 +48,12 @@ class HighScore {
     }
   }
 
-  void newScore(String name, int value) {
+  static void newScore(String name, int value) {
     changeListLast(addZeroes(value) + "   " + name);
     sortScoreBoard();
   }
 
-  String usernameInput() {
+  static String usernameInput() {
     String temp = new String();
     key = '+';
     if (key != '+') {
