@@ -35,8 +35,9 @@ void draw() {
   background(#02043c);
   //p.update();
   p.updateLocal();
-  if (frameCount %50 == 0) {
-    platforms.addPlatform();
+  if (frameCount %80 == 0) { // 80 is better.
+    platforms.addPlatform(platforms.getNewestPlatform());
+    
   }
 
   p.accDown(platforms.PlatformList.toArray(new Platform[0]));
