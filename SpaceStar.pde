@@ -42,7 +42,7 @@ void draw() {
   p.accDown(platforms.PlatformList.toArray(new Platform[0]));
 
   for (Pan q : pannedObjects) {
-    q.move(1);
+    q.move(1+floor(1*pow(frameCount/1000,2)));
     q.render();
   }
   for(int i = 0; i<dots.length; i++){
@@ -78,6 +78,7 @@ void restart() {
   platforms.empty();
   platforms.addPlatform(round(0.2*width), round(0.2*height));
   gameRunning = true;
+  frameCount = 0;
 }
 
 void launchGame() {
