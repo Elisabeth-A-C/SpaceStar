@@ -15,12 +15,15 @@ class PlatformSystem implements Pan {
   }
 
   void addPlatform(Platform previous) {
-    Platform temp = new Platform(round(random(-0.25 * width + previous.pos.x, 0.25 * width+ previous.pos.x)), 0);
+    Platform temp;
+    PVector pos = wrap(new PVector(round(random(-0.25 * width + previous.pos.x, 0.25 * width+ previous.pos.x)), 0));
+    temp = new Platform(pos);
+    
     println(previous.pos.x);
     PlatformList.add(temp);
   }
-  
-  Platform getNewestPlatform(){
+
+  Platform getNewestPlatform() {
     return PlatformList.get(PlatformList.size()-1);
   }
 
@@ -37,6 +40,19 @@ class PlatformSystem implements Pan {
       if (p.pos.y > height) {
         PlatformList.remove(i);
       }
+    }
+  }
+
+  PVector wrap(PVector input) {
+    if (input.x >= width) {
+      input.x = input.x-width;
+    } else if (input.x <= 0) {
+      input.x = input.x+width;
+    }
+    if (input.x <= width && input.x >= 0) {
+      return input;
+    } else {
+      return wrap(input);
     }
   }
 }
