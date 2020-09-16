@@ -61,6 +61,6 @@ class HighScore {
 
   int extractScore(String input) {
     return Integer.parseInt(input.substring(6,9));
-  }
+  } 
   
 }

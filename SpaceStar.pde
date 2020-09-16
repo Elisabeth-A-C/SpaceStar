@@ -2,7 +2,9 @@ import java.util.ArrayList;
 boolean gameRunning;
 boolean displayStartScreen = true;
 boolean displayHS = false;
+boolean up, left, right;
 HighScore HS;
+StarBand SB;
 
 
 Pawn p;
@@ -15,17 +17,19 @@ Background[]dots = new Background[125];
 void setup() {
   fullScreen();
   frameRate(60);  
-  p = new Pawn(new PVector(round(0.25*width), round(0.12*height)));
+  p = new Pawn(new PVector(round(0.5*width), round(0.25*height)));
   platforms = new PlatformSystem();
   for (int i = 0; i<dots.length; i++) {
     dots[i] = new Background();
     pannedObjects.add(dots [i]);
   }
   item = new Collectable(new PVector(200, 200));
+  SB = new StarBand(new PVector(0, height+100));
+  pannedObjects.add(SB);
   pannedObjects.add(platforms);
   pannedObjects.add(p);
   pannedObjects.add(item);
-  platforms.addPlatform(round(0.2*width), round(0.2*height));
+  platforms.addPlatform(round(0.47*width), round(0.3*height));
   PFont f = createFont("Stencil", 100);
   textFont(f);
   HS = new HighScore();
@@ -36,6 +40,7 @@ void setup() {
 void draw() {
   background(#02043c);
   //p.update();
+  p.userInput(up, left, right);
   p.updateLocal();
   if (frameCount %80 == 0) { // 80 is better.
     platforms.addPlatform(platforms.getNewestPlatform());
@@ -58,6 +63,7 @@ void draw() {
     launchGame();
   }
   //  HS.render();
+  SB.replace();
 }
 
 void pause() {
@@ -76,11 +82,12 @@ void pause() {
 
 void restart() {
   loop();
-  p.location = new PVector(round(0.25*width), round(0.12*height));
+  p.location = new PVector(round(0.5*width), round(0.25*height));
   p.velocity = new PVector(0, 0);
   p.acceleration = new PVector (0, 0);
   platforms.empty();
-  platforms.addPlatform(round(0.2*width), round(0.2*height));
+  platforms.addPlatform(round(0.47*width), round(0.3*height));
+  platforms.addPlatform(round(0.40*width), round(0.2*height));
   gameRunning = true;
   frameCount = 0;
 }
@@ -106,19 +113,34 @@ void displayHighScore() {
 }
 
 void keyPressed() {
-  p.userInput(key);
   if (key == ' ') {
     pause();
   } else if (key == 'r') {
     restart();
   } else if (key == 'h') {
     displayHS = !displayHS;
-    loop();
   } else if (key == ESC) {
     exit();
   }
 
-  key ='o'; // control char, that should never be used.
+
+  if (key == 'a' || key == 'A') {
+    left = true;
+  } else if (key == 'd' || key == 'D') {
+    right = true;
+  } else if (key == 'w' || key == 'W') {
+    up = true;
+  }
+}
+
+void keyReleased() {
+  if (key == 'a' || key == 'A') {
+    left = false;
+  } else if (key == 'd' || key == 'D') {
+    right = false;
+  } else if (key == 'w' || key == 'W') {
+    up = false;
+  }
 }
 
 boolean hasDied(Pawn star) {
@@ -127,11 +149,13 @@ boolean hasDied(Pawn star) {
 
 void deathScreen() {
   if (hasDied(p)) {
+    p.move(1000);
     fill(#ff0000);
     background(0);
     textSize(width*0.06);
     text("Tough Luck", 0.31*width, 0.45*height);
     text("You Died", 0.36*width, 0.55*height);
     noLoop();
+    platforms.empty();
   }
 }
