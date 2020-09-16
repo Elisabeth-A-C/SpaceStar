@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 boolean gameRunning;
 boolean displayStartScreen = true;
+boolean displayHS = false;
 HighScore HS;
 
 
@@ -50,6 +51,7 @@ void draw() {
   dots[i].outOfScreen();
   }
   deathScreen();
+  displayHighScore();
 
   if (displayStartScreen) {
     launchGame();
@@ -82,7 +84,6 @@ void restart() {
 }
 
 void launchGame() {
-  // TODO: implement this
   //gameRunning = true;
   background(#0000ff);
   textSize(100);
@@ -97,6 +98,13 @@ void launchGame() {
   }
 }
 
+  void displayHighScore(){
+    // TODO
+    
+    
+    displayHS = !displayHS;
+  }
+
 void keyPressed() {
   if (keyPressed) {
     p.userInput(key);
@@ -104,7 +112,9 @@ void keyPressed() {
       pause();
     } else if (key == 'r') {
       restart();
-    } else if (key == ESC) {
+    } else if(key == 'h'){
+      displayHighScore();
+    }else if (key == ESC) {
     exit();
     }
   }
