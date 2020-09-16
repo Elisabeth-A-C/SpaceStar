@@ -55,17 +55,6 @@ class Pawn implements Pan {
     return false;
   }
 
-  //void userInput(char input) { // takes a input as a char, determins what action the user wants to take. Then it applies a scaled force to the pawn.
-  //  if (isOnGround && (up == true)) {
-  //    isOnGround = false;
-  //    this.applyForce(PVector.mult(new PVector(0, -1), jumpScalar));
-  //  } else if (left == true) {
-  //    this.applyForce(new PVector(-0.25, 0));
-  //  } else if (right == true) {
-  //    this.applyForce(new PVector(0.25, 0));
-  //  }
-  //}
-
   void userInput(boolean up, boolean left, boolean right) {
     if (isOnGround && (up == true)) {
       isOnGround = false;
