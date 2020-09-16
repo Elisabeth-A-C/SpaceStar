@@ -1,9 +1,8 @@
 class Pawn implements Pan {
-
   PVector location, velocity, acceleration; // location is based on the center of the star
-  color paint = color(250,218,94);
-
+  color paint = color(250, 218, 94);
   float x, y, speedLimit;
+  float jumpScalar =5;
 
   boolean isOnGround;
 
@@ -13,19 +12,17 @@ class Pawn implements Pan {
     acceleration = new PVector (0, 0);
     isOnGround = false;
   }
-  
-   Pawn(PVector local) {
-   this();
-   location = local;
-   }
+
+  Pawn(PVector local) {
+    this();
+    location = local;
+  }
 
   void applyForce(PVector force) {
     acceleration.add(force);
   }
 
   void updateLocal() {
- //   velocity.limit(5);
-   // acceleration.limit(5);
     velocity.add(acceleration);
     location.add(velocity);
     acceleration.mult(0);
@@ -33,7 +30,7 @@ class Pawn implements Pan {
     this.y = location.y;
     location = wrap(location);
   }
-  
+
   void accDown(Platform[] p) {
     boolean gravityApplied = false;
     if (isStaningOnPlatform(p)) {
@@ -56,15 +53,25 @@ class Pawn implements Pan {
     return false;
   }
 
-  void userInput(char input) {
+  void userInput(char input) { // takes a input as a char, determins what action the user wants to take. Then it applies a scaled force to the pawn.
     if (isOnGround && (input == 'w' || input == 'W')) {
       isOnGround = false;
-      this.applyForce(new PVector(0, -5));
+      this.applyForce(PVector.mult(new PVector(0, -1), jumpScalar));
     } else if (input == 'a' || input == 'A') {
-      this.applyForce(new PVector(-0.5, 0));
+      this.applyForce(new PVector(-0.25, 0));
     } else if (input == 'd' || input == 'D') {
-      this.applyForce(new PVector(0.5, 0));
+      this.applyForce(new PVector(0.25, 0));
+    } else if (isOnGround && input == 'e' || input == 'E') {
+      this.applyForce(PVector.mult(new PVector(0.5, -1), jumpScalar));
+      isOnGround = false;
+    } else if (isOnGround && input == 'q' || input == 'Q') {
+      this.applyForce(PVector.mult(new PVector(-0.5, -1), jumpScalar));
+      isOnGround = false;
     }
+  }
+
+  void setJumpScalar(float input) {
+    this.jumpScalar = input;
   }
 
   void display() {
@@ -87,7 +94,8 @@ class Pawn implements Pan {
     this.x += xChange ;
     this.y += yChange ;
   }
-//star
+
+  //star
   void star(float x, float y, float radius1, float radius2, int npoints) {
     float angle = TWO_PI / npoints;
     float halfAngle = angle/2;
@@ -102,18 +110,17 @@ class Pawn implements Pan {
     }
     endShape(CLOSE);
   }
-  
+
   PVector wrap(PVector input) {
     if (input.x >= width) {
-    input.x = input.x-width;
+      input.x = input.x-width;
     } else if (input.x <= 0) {
-    input.x = input.x+width;
+      input.x = input.x+width;
     }
     if (input.x <= width && input.x >= 0) {
-    return input;
+      return input;
     } else {
-    return wrap(input);
+      return wrap(input);
     }
   }
-
 }
