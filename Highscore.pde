@@ -10,11 +10,11 @@ class HighScore {
   void render() {
     background(0);
     fill(12, 184, 252);
-    textSize(40);
+    textSize(height/26);
     stroke(0);
-    text("HighScore", 0.425*width, 0.35*height);
+    text("High Score", 0.425*width, 0.35*height);
     for (int i = 0; i < scores.length; i++) {
-      text(scores[i], 0.435*width, 0.04*i*height+height*0.4);
+      text(scores[i], 0.439*width, 0.04*i*height+height*0.4);
     }
   } 
 
@@ -27,6 +27,7 @@ class HighScore {
   }
 
   void sortScoreBoard() {
+    // TODO: sort based on number not string
     scores = sort(scores);
   }
 
@@ -54,13 +55,12 @@ class HighScore {
     sortScoreBoard();
   }
 
-  String usernameInput() {
-    String temp = new String();
-    return temp;
-  }
-
   int extractScore(String input) {
-    return Integer.parseInt(input.substring(6,9));
+    return Integer.parseInt(input.substring(6, 9));
   } 
-  
+
+  String singleInput() {
+    //  TODO: implement this
+   return "error";
+  }
 }

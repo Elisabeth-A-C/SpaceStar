@@ -3,8 +3,13 @@ boolean gameRunning;
 boolean displayStartScreen = true;
 boolean displayHS = false;
 boolean up, left, right;
+boolean isDead = false;
 HighScore HS;
 StarBand SB;
+
+import processing.sound.*;
+SoundFile backgroundMusic;
+SoundFile deadBackgroundMusic;
 
 Pawn p;
 PlatformSystem platforms;
@@ -31,13 +36,14 @@ void setup() {
   PFont f = createFont("Stencil", 100);
   textFont(f);
   HS = new HighScore();
+  backgroundMusic = new SoundFile(this, "SpaceStarBackgroundMusic.mp3");
 }
 
 void draw() {
   background(#02043c);
   p.userInput(up, left, right);
-  p.updateLocal();
-  
+  p.updateLocal(); 
+
   if (frameCount %150 == 0) { // 80 is better.
     platforms.addPlatform(platforms.getNewestPlatform());
   }
@@ -51,7 +57,7 @@ void draw() {
   for (int i = 0; i<dots.length; i++) {
     dots[i].outOfScreen();
   }
-  
+
   renderScore();
 
   deathScreen();
@@ -62,12 +68,13 @@ void draw() {
     launchGame();
   }
   SB.replace();
+  // HS.render(); //TODO: DELETE THIS
 }
 
-void renderScore(){
+void renderScore() {
   textSize(width * 0.035);
   fill(#ff0000);
-  text(HS.addZeroes(p.point), width*0.9, height*0.1);  
+  text(HS.addZeroes(p.point), width*0.9, height*0.1);
 }
 
 void pause() {
@@ -95,6 +102,11 @@ void restart() {
   gameRunning = true;
   frameCount = 500; // this solves a problem with platforms remaining
   SB.move(-10*height);
+  if (isDead == true) {
+    deadBackgroundMusic.stop();
+    isDead = false;
+  }
+  backgroundMusic.loop();
 }
 
 void launchGame() {
@@ -136,6 +148,10 @@ void keyPressed() {
     right = true;
   } else if (key == 'w' || key == 'W' || (key == CODED && keyCode == UP)) {
     up = true;
+  } else if (key == 'm' || key == 'M') {
+    if (backgroundMusic.isPlaying()) {
+      backgroundMusic.pause();
+    } else backgroundMusic.play(); //TODO: loop'er den stadig?
   }
 }
 
@@ -163,5 +179,9 @@ void deathScreen() {
     text("You Died", 0.36*width, 0.55*height);
     noLoop();
     platforms.empty();
+    backgroundMusic.stop();
+    isDead = true;
+    deadBackgroundMusic = new SoundFile(this, "DeadBackgroundMusic.mp3");
+    deadBackgroundMusic.play();
   }
 }
