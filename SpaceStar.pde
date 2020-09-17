@@ -29,17 +29,13 @@ void setup() {
   pannedObjects.add(platforms);
   pannedObjects.add(p);
   pannedObjects.add(item);
-  platforms.addPlatform(round(0.47*width), round(0.2*height));
   PFont f = createFont("Stencil", 100);
   textFont(f);
   HS = new HighScore();
- 
-  
 }
 
 void draw() {
   background(#02043c);
-  //p.update();
   p.userInput(up, left, right);
   p.updateLocal();
   if (frameCount %150 == 0) { // 80 is better.
@@ -62,7 +58,6 @@ void draw() {
   if (displayStartScreen) {
     launchGame();
   }
-  //  HS.render();
   SB.replace();
 }
 
@@ -70,9 +65,9 @@ void pause() {
   // Pause is also resume
 
   if (gameRunning) {
-    textSize(width*0.05);
+    textSize(width*0.035);
     fill(#fc4103);
-    text("GAME PAUSED", width*0.05, width*0.08);
+    text("GAME PAUSED", width*0.04, width*0.06);
     noLoop();
   } else {
     loop();
@@ -87,9 +82,10 @@ void restart() {
   p.acceleration = new PVector (0, 0);
   platforms.empty();
   platforms.addPlatform(round(0.47*width), round(0.3*height));
-  platforms.addPlatform(round(0.40*width), round(0.2*height));
+  platforms.addPlatform(round(0.40*width), round(0.1*height));
   gameRunning = true;
   frameCount = 500;
+  SB.move(-10*height);
 }
 
 void launchGame() {
@@ -109,7 +105,7 @@ void launchGame() {
 void displayHighScore() {
   if (displayHS) {
     HS.render();
-    noLoop();  
+    noLoop();
   }
 }
 
