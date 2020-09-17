@@ -2,7 +2,8 @@ class Platform implements Pan {
   PVector pos;
   PVector dimensions;
   color paint;
-
+  boolean containsPoint = true;
+  
   Platform() {
     this.dimensions = new PVector(150, 25);
     this.pos = new PVector(0, 0);

@@ -50,6 +50,11 @@ class Pawn implements Pan {
   boolean isStaningOnPlatform(Platform[] inp) {
     for (Platform q : inp) {
       if (q.isStandingOn(this)) {
+
+        if (q.containsPoint) {
+          this.point++;
+          q.containsPoint = false;
+        }
         return true;
       }
     }

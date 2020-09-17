@@ -9,6 +9,7 @@ StarBand SB;
 Pawn p;
 PlatformSystem platforms;
 Collectable item;
+CollectableSystem itemSystem;
 
 ArrayList<Pan> pannedObjects = new ArrayList<Pan>();
 Background[]dots = new Background[125];
@@ -28,6 +29,7 @@ void setup() {
   pannedObjects.add(platforms);
   pannedObjects.add(p);
   pannedObjects.add(item);
+  //pannedObjects.add(itemSystem);
   PFont f = createFont("Stencil", 100);
   textFont(f);
   HS = new HighScore();
@@ -37,37 +39,38 @@ void draw() {
   background(#02043c);
   p.userInput(up, left, right);
   p.updateLocal();
-  
+
   if (frameCount %150 == 0) { // 80 is better.
     platforms.addPlatform(platforms.getNewestPlatform());
+    //itemSystem.addCol(platforms.getNewestPlatform());
   }
 
   p.accDown(platforms.PlatformList.toArray(new Platform[0]));
 
   for (Pan q : pannedObjects) {
-    q.move(1+floor(1*(frameCount/8000)));
+    //q.move(1+floor(1*(frameCount/8000)));
+    q.move(1+floor(p.point/25));
     q.render();
   }
   for (int i = 0; i<dots.length; i++) {
     dots[i].outOfScreen();
   }
-  
+
   renderScore();
 
   deathScreen();
 
   displayHighScore();
 
-  if (displayStartScreen) {
-    launchGame();
-  }
+  launchGame();
+
   SB.replace();
 }
 
-void renderScore(){
+void renderScore() {
   textSize(width * 0.035);
   fill(#ff0000);
-  text(HS.addZeroes(p.point), width*0.9, height*0.1);  
+  text(HS.addZeroes(p.point), width*0.9, height*0.1);
 }
 
 void pause() {
@@ -95,19 +98,22 @@ void restart() {
   gameRunning = true;
   frameCount = 500; // this solves a problem with platforms remaining
   SB.move(-10*height);
+  p.point = 0;
 }
 
 void launchGame() {
-  //gameRunning = true;
-  background(#2CDBBE);
-  fill(240);
-  textSize(width*0.05);
-  text("SpaceSTAR", 0.355*width, 0.45*height);
-  text("Press any key to Start", 0.20*width, 0.55*height);
+  if (displayStartScreen) {
+    //gameRunning = true;
+    background(#2CDBBE);
+    fill(240);
+    textSize(width*0.05);
+    text("SpaceSTAR", 0.355*width, 0.45*height);
+    text("Press any key to Start", 0.20*width, 0.55*height);
 
-  if (keyPressed) {
-    displayStartScreen = false;
-    restart();
+    if (keyPressed) {
+      displayStartScreen = false;
+      restart();
+    }
   }
 }
 
