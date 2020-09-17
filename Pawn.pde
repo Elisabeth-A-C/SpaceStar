@@ -3,14 +3,12 @@ class Pawn implements Pan {
   color paint = color(250, 218, 94);
   int point = 0;
 
-  float x, y, speedLimit;
+  float speedLimit;
   float jumpScalar = height/216;
 
   boolean isOnGround;
   boolean doubleJump;  
   
-
-
   Pawn() {
     location = new PVector(0, 0);
     velocity = new PVector (0, 0);
@@ -31,8 +29,6 @@ class Pawn implements Pan {
     velocity.add(acceleration);
     location.add(velocity);
     acceleration.mult(0);
-    this.x = location.x;
-    this.y = location.y;
     location = wrap(location);
   }
 
@@ -52,7 +48,7 @@ class Pawn implements Pan {
   boolean isStaningOnPlatform(Platform[] inp) {
     for (Platform q : inp) {
       if (q.isStandingOn(this)) {
-
+        // point and score system 
         if (q.containsPoint) {
           this.point++;
           q.containsPoint = false;
@@ -80,11 +76,10 @@ class Pawn implements Pan {
   void setJumpScalar(float input) {
     this.jumpScalar = input;
   } 
-
   
   void display() {
     pushMatrix();
-    translate(x, y);
+    translate(this.location.x, this.location.y);
     fill(paint);
     star(0, 0, 30, 70, 5); 
     popMatrix();
@@ -99,11 +94,11 @@ class Pawn implements Pan {
   }
 
   void move(int xChange, int yChange) {
-    this.x += xChange ;
-    this.y += yChange ;
+    this.location.x += xChange ;
+    this.location.y += yChange ;
   }
 
-  //star
+  //star shape
   void star(float x, float y, float radius1, float radius2, int npoints) {
     float angle = TWO_PI / npoints;
     float halfAngle = angle/2;

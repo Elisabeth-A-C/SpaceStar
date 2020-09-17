@@ -1,5 +1,6 @@
 class PlatformSystem implements Pan {
   ArrayList<Platform>PlatformList = new ArrayList<Platform>();
+  
   void move(int yChange) {
     for (Platform Q : PlatformList) {
       Q.move(yChange);
@@ -10,11 +11,13 @@ class PlatformSystem implements Pan {
       Q.render();
     }
   }
+  
   void addPlatform() {
-    PlatformList.add(new Platform(round(random(width)), 0));
+    PlatformList.add(new Platform(round(random(0, width-150)), 0));
   }
 
   void addPlatform(Platform previous) {
+    //TODO: make it impossible for platforms to appear on the edge of the screen.
     Platform temp;
     PVector pos = wrap(new PVector(round(random(-0.25 * width + previous.pos.x, 0.25 * width+ previous.pos.x)), 0));
     temp = new Platform(pos);
@@ -22,7 +25,6 @@ class PlatformSystem implements Pan {
   }
 
   Platform getNewestPlatform() {
-    
     if(PlatformList.size()-1 >= 0){
     return PlatformList.get(PlatformList.size()-1);
     }else{

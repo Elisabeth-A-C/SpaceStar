@@ -32,56 +32,8 @@ class CollectableSystem implements Pan {
 
     // nothing: 9 coin:9  Color:1 DJ:2 HJ:3
 
-    PVector centerPlatform = plat.pos;
-
-    int swi = floor(random(24));
-
-    switch(swi) {
-    case 8:
-      CollectableList.add(new Coin(centerPlatform));
-      break;
-    case 9:
-      CollectableList.add(new Coin(centerPlatform));
-      break;      
-    case 10:
-      CollectableList.add(new Coin(centerPlatform));
-      break;      
-    case 11:
-      CollectableList.add(new Coin(centerPlatform));
-      break;      
-    case 12:
-      CollectableList.add(new Coin(centerPlatform));
-      break;
-    case 14:
-      CollectableList.add(new Coin(centerPlatform));
-      break;
-    case 15:
-      CollectableList.add(new Coin(centerPlatform));
-      break;
-    case 16:
-      CollectableList.add(new Coin(centerPlatform));
-      break;
-    case 17:
-      CollectableList.add(new Changecolor(centerPlatform));
-      break;
-    case 18:
-      CollectableList.add(new Doublejump(centerPlatform));
-      break;
-    case 19:
-      CollectableList.add(new Doublejump(centerPlatform));
-      break;
-    case 20:
-      CollectableList.add(new Higherjump(centerPlatform));
-      break;
-    case 21:
-      CollectableList.add(new Higherjump(centerPlatform));
-      break;
-    case 22:
-      CollectableList.add(new Higherjump(centerPlatform));
-      break;
-    default:
-      break;
-    }
+    //TODO: implement this
+   
   }
 
   void interaction(Pawn star) {

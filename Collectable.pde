@@ -19,7 +19,7 @@ class Collectable implements Pan {
 
   boolean istouching(Pawn star) {
     float radius = 20;
-    if (star.x <= pos.x + radius && star.x >= pos.x -radius && star.y <= pos.y + radius && star.y >= pos.y -radius) {
+    if (star.location.x <= pos.x + radius && star.location.x >= pos.x -radius && star.location.y <= pos.y + radius && star.location.y >= pos.y -radius) {
       return true;
     }
     return false;
@@ -74,7 +74,6 @@ class Coin extends Collectable {
   }
 }
 
-
 class Doublejump extends Collectable {
 
   Doublejump(PVector _pos) {
@@ -90,7 +89,6 @@ class Doublejump extends Collectable {
   }
 }
 
-
 class Changecolor extends Collectable {
   Changecolor(PVector _pos) {
     super(_pos);
@@ -105,7 +103,6 @@ class Changecolor extends Collectable {
     star.paint = list[floor(random(list.length))];
   }
 }
-
 
 class Higherjump extends Collectable {
   Higherjump(PVector _pos) {

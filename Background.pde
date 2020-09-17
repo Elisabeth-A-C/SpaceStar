@@ -13,7 +13,6 @@ class Background extends Platform implements Pan {
 
   Background(PVector _pos) {
     this(_pos, round(random(3, 11)));
-   
   }
 
   Background() {
@@ -25,6 +24,8 @@ class Background extends Platform implements Pan {
   }
 
   void outOfScreen() {
-    if (pos.y >= height) moveScreen();
+    if (pos.y >= height) { 
+      moveScreen();
+    }
   }
 }

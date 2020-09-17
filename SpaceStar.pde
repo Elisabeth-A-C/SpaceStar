@@ -175,6 +175,7 @@ void deathScreen() {
     textSize(width*0.06);
     text("Tough Luck", 0.31*width, 0.45*height);
     text("You Died", 0.36*width, 0.55*height);
+    text("Score:" + HS.addZeroes(p.point), 0.36*width, 0.65*height); // TODO: center on screen
     textSize(width*0.02);
     text("r = restart", 0.16*width, 0.72*height);  
     text("h = highscore", 0.16*width, 0.78*height);
