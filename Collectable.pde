@@ -46,6 +46,10 @@ class Collectable implements Pan {
 }
 
 class Coin extends Collectable {
+  Coin(PVector _pos) {
+    super(_pos);
+  }
+
   void star(float x, float y, float radius1, float radius2, int npoints) {
     float angle = TWO_PI / npoints;
     float halfAngle = angle/2;
@@ -72,6 +76,10 @@ class Coin extends Collectable {
 
 
 class Doublejump extends Collectable {
+
+  Doublejump(PVector _pos) {
+    super(_pos);
+  }
   void render() {
     fill(#FF1919);
     circle(pos.x, pos.y, 10);
@@ -85,6 +93,9 @@ class Doublejump extends Collectable {
 
 
 class Changecolor extends Collectable {
+  Changecolor(PVector _pos) {
+    super(_pos);
+  }
   void render() {
     fill(#EF19FF);
     circle(pos.x, pos.y, 10);
@@ -98,6 +109,9 @@ class Changecolor extends Collectable {
 
 
 class Higherjump extends Collectable {
+  Higherjump(PVector _pos) {
+    super(_pos);
+  }
   void render() {
     fill(#19FFD1);
     circle(pos.x, pos.y, 10);
