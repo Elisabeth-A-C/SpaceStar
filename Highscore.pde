@@ -14,7 +14,7 @@ class HighScore {
     stroke(0);
     text("HighScore", 0.425*width, 0.35*height);
     for (int i = 0; i < scores.length; i++) {
-      text(scores[i], 0.475*width, 0.04*i*height+height*0.4);
+      text(scores[i], 0.435*width, 0.04*i*height+height*0.4);
     }
   } 
 
