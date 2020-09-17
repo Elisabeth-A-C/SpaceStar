@@ -6,7 +6,6 @@ boolean up, left, right;
 HighScore HS;
 StarBand SB;
 
-
 Pawn p;
 PlatformSystem platforms;
 Collectable item;
@@ -29,12 +28,9 @@ void setup() {
   pannedObjects.add(platforms);
   pannedObjects.add(p);
   pannedObjects.add(item);
-  platforms.addPlatform(round(0.47*width), round(0.2*height));
   PFont f = createFont("Stencil", 100);
   textFont(f);
   HS = new HighScore();
- 
-  
 }
 
 void draw() {
@@ -42,6 +38,7 @@ void draw() {
   //p.update();
   p.userInput(up, left, right);
   p.updateLocal();
+  
   if (frameCount %150 == 0) { // 80 is better.
     platforms.addPlatform(platforms.getNewestPlatform());
   }
@@ -55,6 +52,9 @@ void draw() {
   for (int i = 0; i<dots.length; i++) {
     dots[i].outOfScreen();
   }
+  
+  renderScore();
+
   deathScreen();
 
   displayHighScore();
@@ -64,6 +64,12 @@ void draw() {
   }
   //  HS.render();
   SB.replace();
+}
+
+void renderScore(){
+  textSize(width * 0.035);
+  fill(#ff0000);
+  text(HS.addZeroes(p.point), width*0.9, height*0.1);  
 }
 
 void pause() {
@@ -89,7 +95,7 @@ void restart() {
   platforms.addPlatform(round(0.47*width), round(0.3*height));
   platforms.addPlatform(round(0.40*width), round(0.2*height));
   gameRunning = true;
-  frameCount = 500;
+  frameCount = 500; // this solves a problem with platforms remaining
 }
 
 void launchGame() {
@@ -109,7 +115,7 @@ void launchGame() {
 void displayHighScore() {
   if (displayHS) {
     HS.render();
-    noLoop();  
+    noLoop();
   }
 }
 
@@ -120,10 +126,10 @@ void keyPressed() {
     restart();
   } else if (key == 'h') {
     displayHS = !displayHS;
+    loop();
   } else if (key == ESC) {
     exit();
   }
-
 
   if (key == 'a' || key == 'A' || (key == CODED && keyCode == LEFT)) {
     left = true;
