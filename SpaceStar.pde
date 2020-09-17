@@ -77,7 +77,7 @@ void pause() {
   // Pause is also resume
 
   if (gameRunning) {
-    textSize(width*0.035);
+    textSize(width * 0.035);
     fill(#fc4103);
     text("GAME PAUSED", width*0.04, width*0.06);
     noLoop();
@@ -89,7 +89,7 @@ void pause() {
 
 void restart() {
   loop();
-  p.location = new PVector(round(0.5*width), round(0.25*height));
+  p.location = new PVector(round(0.51*width), round(0.2*height));
   p.velocity = new PVector(0, 0);
   p.acceleration = new PVector (0, 0);
   platforms.empty();
@@ -102,18 +102,23 @@ void restart() {
 }
 
 void launchGame() {
-  if (displayStartScreen) {
-    //gameRunning = true;
-    background(#2CDBBE);
-    fill(240);
-    textSize(width*0.05);
-    text("SpaceSTAR", 0.355*width, 0.45*height);
-    text("Press any key to Start", 0.20*width, 0.55*height);
+  background(#2CDBBE);
+  fill(240);
+  textSize(width*0.05);
+  text("SpaceSTAR", 0.355*width, 0.45*height);
+  text("Press any key to Start", 0.20*width, 0.55*height);
+  textSize(width*0.02);
+  text("up arrow/w = hop", 0.125*width, 0.25*height);
+  text("left arrow/a = left", 0.385*width, 0.25*height);
+  text("right arrow/d = right", 0.65*width, 0.25*height);
+  text("spacebar = pause", 0.4*width, 0.75*height);
+  text("r = restart", 0.16*width, 0.72*height);  
+  text("h = highscore", 0.16*width, 0.78*height);
+  text("esc = end game", 0.67*width, 0.75*height);
 
-    if (keyPressed) {
-      displayStartScreen = false;
-      restart();
-    }
+  if (keyPressed) {
+    displayStartScreen = false;
+    restart();
   }
 }
 
@@ -167,6 +172,10 @@ void deathScreen() {
     textSize(width*0.06);
     text("Tough Luck", 0.31*width, 0.45*height);
     text("You Died", 0.36*width, 0.55*height);
+    textSize(width*0.02);
+    text("r = restart", 0.16*width, 0.72*height);  
+    text("h = highscore", 0.16*width, 0.78*height);
+    text("esc = end game", 0.67*width, 0.75*height);
     noLoop();
     platforms.empty();
   }

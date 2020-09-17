@@ -2,14 +2,11 @@ import java.util.Random;
 
 class Collectable implements Pan {
   PVector pos; // the center of the collectable
-  boolean isAlive;
 
   Collectable(PVector _pos) {
-    this();
     pos = _pos;
   }
   Collectable() {
-    isAlive = true;
   }
 
 
@@ -25,14 +22,7 @@ class Collectable implements Pan {
     return false;
   }
 
-  void collectPower(Pawn star) { // the general action of getting a powerup.
-    if (istouching(star)) {
-      powerup(star);
-      stopExisting();
-    }
-  }
-
-  void powerup(Pawn star) { // the specific thing that needs to happen.
+  void powerup()  {
     //empty on purpose
   }
 
@@ -40,16 +30,32 @@ class Collectable implements Pan {
     //empty on purpose
   }
 
-  void stopExisting() {
-    this.isAlive = false;
+  void collectPower(Pawn star) {
+    // empty on purpose
+  }
+  
+  void render() {
+    if (isappearing()) {
+      fill(255);
+      circle(width/2, height/2, width/300);
+    }
+  }
+  
+  boolean isExisting()  {
+    //TODO implement this
+    return false;
+  }
+  
+  void applyPowerup(Pawn star) {
+    if (isthouching) {
+      powerup(star);
+      isExisting();
+    }  
   }
 }
 
-class Coin extends Collectable {
-  Coin(PVector _pos) {
-    super(_pos);
-  }
 
+class Coin extends Collectable {
   void star(float x, float y, float radius1, float radius2, int npoints) {
     float angle = TWO_PI / npoints;
     float halfAngle = angle/2;
@@ -64,11 +70,12 @@ class Coin extends Collectable {
     }
     endShape(CLOSE);
   }
-
+  
   void render() {
     fill(#FFFF19);
-    star(pos.x, pos.y, 5, 12, 5);
+    star(pos.x, pos.y, 5, 12, 5); 
   }
+  
   void powerup(Pawn star) {
     star.point = star.point + 1;
   }
@@ -76,31 +83,25 @@ class Coin extends Collectable {
 
 
 class Doublejump extends Collectable {
-
-  Doublejump(PVector _pos) {
-    super(_pos);
-  }
   void render() {
     fill(#FF1919);
     circle(pos.x, pos.y, 10);
   }
-
+  
   void powerup(Pawn star) {
-    star.doubleJump = true;
+    //TODO implement this
+    //Man skal få et doppelthop når stjernen får denne collectable
   }
 }
 
 
 class Changecolor extends Collectable {
-  Changecolor(PVector _pos) {
-    super(_pos);
-  }
   void render() {
     fill(#EF19FF);
     circle(pos.x, pos.y, 10);
   }
-
-  void powerup(Pawn star) {
+  
+  void powerup(Pawn star){
     color[] list = {color(#E95BD6), color(#9BF766), color(#66CCF7), color(#FA4185), color(#F9F9F1), color(#FADA5E), color(#FF9933), color(#C310F0)};
     star.paint = list[floor(random(list.length))];
   }
@@ -108,15 +109,12 @@ class Changecolor extends Collectable {
 
 
 class Higherjump extends Collectable {
-  Higherjump(PVector _pos) {
-    super(_pos);
-  }
   void render() {
     fill(#19FFD1);
     circle(pos.x, pos.y, 10);
   }
-
-  void powerup(Pawn star) {
-    star.jumpScalar += 2;
+  
+  void powerup(Pawn star){
+    star.jumpScalar = 7
   }
 }
