@@ -104,6 +104,7 @@ void launchGame() {
   textSize(width*0.05);
   text("SpaceSTAR", 0.355*width, 0.45*height);
   text("Press any key to Start", 0.20*width, 0.55*height);
+  //square(width*0.3, height*0.175, height*0.175);
 
   if (keyPressed) {
     displayStartScreen = false;

@@ -7,6 +7,8 @@ class Pawn implements Pan {
   float jumpScalar = height/216;
 
   boolean isOnGround;
+  boolean doubleJump;  
+  
 
 
   Pawn() {
@@ -64,15 +66,17 @@ class Pawn implements Pan {
       this.applyForce(new PVector(-0.25, 0));
     } else if (right == true) {
       this.applyForce(new PVector(0.25, 0));
+    } else if ((isOnGround = false) && (up == true) && doubleJump) {
+      this.applyForce(PVector.mult(new PVector(0, -1), jumpScalar));
+      doubleJump = false;
     }
   }
 
-
-
   void setJumpScalar(float input) {
     this.jumpScalar = input;
-  }
+  } 
 
+  
   void display() {
     pushMatrix();
     translate(x, y);
