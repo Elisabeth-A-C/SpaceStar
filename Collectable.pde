@@ -2,11 +2,14 @@ import java.util.Random;
 
 class Collectable implements Pan {
   PVector pos; // the center of the collectable
+  boolean isAlive;
 
   Collectable(PVector _pos) {
+    this();
     pos = _pos;
   }
   Collectable() {
+    isAlive = true;
   }
 
 
@@ -22,8 +25,14 @@ class Collectable implements Pan {
     return false;
   }
 
+  void collectPower(Pawn star) { // the general action of getting a powerup.
+    if (istouching(star)) {
+      powerup(star);
+      stopExisting();
+    }
+  }
 
-  void powerup() {
+  void powerup(Pawn star) { // the specific thing that needs to happen.
     //empty on purpose
   }
 
@@ -31,48 +40,36 @@ class Collectable implements Pan {
     //empty on purpose
   }
 
-  void collectPower(Pawn star) {
-    // empty on purpose
-  }
-
-
-  class Coin extends Collectable {
-    void star(float x, float y, float radius1, float radius2, int npoints) {
-      float angle = TWO_PI / npoints;
-      float halfAngle = angle/2;
-      beginShape();
-      for (float a = 0.966644; a < TWO_PI; a += angle) {
-        float sx = x + cos(a) * radius2;
-        float sy = y + sin(a) * radius2;
-        vertex(sx, sy);
-        sx = x + cos(a+halfAngle) * radius1;
-        sy = y + sin(a+halfAngle) * radius1;
-        vertex(sx, sy);
-      }
-      endShape(CLOSE);
-    }
-  }
-
   void stopExisting() {
-    //TODO implement this
+    this.isAlive = false;
+  }
+}
+
+class Coin extends Collectable {
+  void star(float x, float y, float radius1, float radius2, int npoints) {
+    float angle = TWO_PI / npoints;
+    float halfAngle = angle/2;
+    beginShape();
+    for (float a = 0.966644; a < TWO_PI; a += angle) {
+      float sx = x + cos(a) * radius2;
+      float sy = y + sin(a) * radius2;
+      vertex(sx, sy);
+      sx = x + cos(a+halfAngle) * radius1;
+      sy = y + sin(a+halfAngle) * radius1;
+      vertex(sx, sy);
+    }
+    endShape(CLOSE);
   }
 
-  //void applyPowerup(Pawn star) {
-  //  if (istouching) {
-  //    powerup(star);
-  //    stopExisting();
-  //  }
-  //}
+  void render() {
+    fill(#FFFF19);
+    star(pos.x, pos.y, 5, 12, 5);
+  }
+  void powerup(Pawn star) {
+    star.point = star.point + 1;
+  }
 }
 
-//void render() {
-//  fill(#FFFF19);
-//  star(pos.x, pos.y, 5, 12, 5);
-//}
-
-void powerup(Pawn star) {
-  star.point = star.point + 1;
-}
 
 class Doublejump extends Collectable {
   void render() {
@@ -107,6 +104,6 @@ class Higherjump extends Collectable {
   }
 
   void powerup(Pawn star) {
-    star.jumpScalar = 7;
+    star.jumpScalar += 2;
   }
 }
