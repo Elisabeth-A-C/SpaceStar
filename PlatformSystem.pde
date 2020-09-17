@@ -22,7 +22,12 @@ class PlatformSystem implements Pan {
   }
 
   Platform getNewestPlatform() {
+    
+    if(PlatformList.size()-1 >= 0){
     return PlatformList.get(PlatformList.size()-1);
+    }else{
+    return new Platform(0,0);
+    }
   }
 
   void addPlatform(int x, int y) {
