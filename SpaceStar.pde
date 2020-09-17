@@ -65,7 +65,7 @@ void pause() {
   // Pause is also resume
 
   if (gameRunning) {
-    textSize(width*0.035);
+    textSize(width * 0.035);
     fill(#fc4103);
     text("GAME PAUSED", width*0.04, width*0.06);
     noLoop();
@@ -77,7 +77,7 @@ void pause() {
 
 void restart() {
   loop();
-  p.location = new PVector(round(0.5*width), round(0.25*height));
+  p.location = new PVector(round(0.51*width), round(0.2*height));
   p.velocity = new PVector(0, 0);
   p.acceleration = new PVector (0, 0);
   platforms.empty();
