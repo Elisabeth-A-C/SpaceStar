@@ -52,28 +52,26 @@ class Collectable implements Pan {
       endShape(CLOSE);
     }
   }
-  
-  void stopExisting()  {
+
+  void stopExisting() {
     //TODO implement this
   }
-  
-  void applyPowerup(Pawn star) {
-    if (isthouching) {
-      powerup(star);
-      stopExisting();
-    }  
-  }
+
+  //void applyPowerup(Pawn star) {
+  //  if (istouching) {
+  //    powerup(star);
+  //    stopExisting();
+  //  }
+  //}
 }
 
-    void render() {
-      fill(#FFFF19);
-      star(pos.x, pos.y, 5, 12, 5);
-    }
+//void render() {
+//  fill(#FFFF19);
+//  star(pos.x, pos.y, 5, 12, 5);
+//}
 
-    void powerup(Pawn star) {
-      star.point = star.point + 1;
-    }
-  }
+void powerup(Pawn star) {
+  star.point = star.point + 1;
 }
 
 class Doublejump extends Collectable {
@@ -107,8 +105,8 @@ class Higherjump extends Collectable {
     fill(#19FFD1);
     circle(pos.x, pos.y, 10);
   }
-  
-  void powerup(Pawn star){
-    star.jumpScalar = 7
+
+  void powerup(Pawn star) {
+    star.jumpScalar = 7;
   }
 }

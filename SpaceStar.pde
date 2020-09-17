@@ -24,14 +24,13 @@ void setup() {
     pannedObjects.add(dots [i]);
   }
   item = new Collectable(new PVector(200, 200));
-  SB = new StarBand(new PVector(0, height+100));
+  SB = new StarBand(new PVector(0, -10*height));
   pannedObjects.add(SB);
   pannedObjects.add(platforms);
   pannedObjects.add(p);
   pannedObjects.add(item);
-  platforms.addPlatform(round(0.47*width), round(0.3*height));
+  platforms.addPlatform(round(0.47*width), round(0.2*height));
   PFont f = createFont("Stencil", 100);
-  // platforms.addPlatform(round(0.2*width), round(0.2*height));
   textFont(f);
   HS = new HighScore();
  
@@ -43,14 +42,14 @@ void draw() {
   //p.update();
   p.userInput(up, left, right);
   p.updateLocal();
-  if (frameCount %80 == 0) { // 80 is better.
+  if (frameCount %150 == 0) { // 80 is better.
     platforms.addPlatform(platforms.getNewestPlatform());
   }
 
   p.accDown(platforms.PlatformList.toArray(new Platform[0]));
 
   for (Pan q : pannedObjects) {
-    q.move(1+floor(1*pow(frameCount/1000, 2)));
+    q.move(1+floor(1*(frameCount/8000)));
     q.render();
   }
   for (int i = 0; i<dots.length; i++) {
@@ -90,7 +89,7 @@ void restart() {
   platforms.addPlatform(round(0.47*width), round(0.3*height));
   platforms.addPlatform(round(0.40*width), round(0.2*height));
   gameRunning = true;
-  frameCount = 0;
+  frameCount = 500;
 }
 
 void launchGame() {
@@ -126,21 +125,21 @@ void keyPressed() {
   }
 
 
-  if (key == 'a' || key == 'A') {
+  if (key == 'a' || key == 'A' || (key == CODED && keyCode == LEFT)) {
     left = true;
-  } else if (key == 'd' || key == 'D') {
+  } else if (key == 'd' || key == 'D' || (key == CODED && keyCode == RIGHT)) {
     right = true;
-  } else if (key == 'w' || key == 'W') {
+  } else if (key == 'w' || key == 'W' || (key == CODED && keyCode == UP)) {
     up = true;
   }
 }
 
 void keyReleased() {
-  if (key == 'a' || key == 'A') {
+  if (key == 'a' || key == 'A' || key == LEFT || (key == CODED && keyCode == LEFT)) {
     left = false;
-  } else if (key == 'd' || key == 'D') {
+  } else if (key == 'd' || key == 'D' || (key == CODED && keyCode == RIGHT)) {
     right = false;
-  } else if (key == 'w' || key == 'W') {
+  } else if (key == 'w' || key == 'W' || (key == CODED && keyCode == UP)) {
     up = false;
   }
 }

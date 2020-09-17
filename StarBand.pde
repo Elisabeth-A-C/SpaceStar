@@ -22,7 +22,7 @@ class StarBand implements Pan {
 
   void replace() {
     if (location.y > height) {
-      move(500);
+    move(-10*height);
     }
   }
 }
