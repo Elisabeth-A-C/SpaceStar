@@ -36,7 +36,12 @@ void draw() {
   //p.update();
   p.moveAnd();
   p.updateLocal();
+<<<<<<< Updated upstream
   if (frameCount %80 == 0) { // 80 is better.
+=======
+
+  if (frameCount %150 == 0) { // 80 is better.
+>>>>>>> Stashed changes
     platforms.addPlatform(platforms.getNewestPlatform());
     
   }
@@ -50,13 +55,30 @@ void draw() {
   for(int i = 0; i<dots.length; i++){
   dots[i].outOfScreen();
   }
+<<<<<<< Updated upstream
+=======
+  displayButton();
+
+  renderScore();
+
+>>>>>>> Stashed changes
   deathScreen();
   displayHighScore();
 
   if (displayStartScreen) {
     launchGame();
   }
+<<<<<<< Updated upstream
 //  HS.render();
+=======
+  SB.replace();
+}
+
+void renderScore() {
+  textSize(width * 0.035);
+  fill(#ff0000);
+  text(HS.addZeroes(p.point), width*0.9, height*0.1);
+>>>>>>> Stashed changes
 }
 
 void pause() {
@@ -81,7 +103,12 @@ void restart() {
   platforms.empty();
   platforms.addPlatform(round(0.2*width), round(0.2*height));
   gameRunning = true;
+<<<<<<< Updated upstream
   frameCount = 0;
+=======
+  frameCount = 500; // this solves a problem with platforms remaining - with framecount 0 it does not update
+  SB.move(-10*height);
+>>>>>>> Stashed changes
 }
 
 void launchGame() {
@@ -90,9 +117,9 @@ void launchGame() {
   fill(240);
   textSize(width*0.05);
   text("SpaceSTAR", 0.355*width, 0.45*height);
-  text("Press any key to Start", 0.20*width, 0.55*height);
+  text("Press to Start", 0.20*width, 0.55*height);
 
-  if (keyPressed) {
+  if (mousePressed) {
     displayStartScreen = false;
     restart();
   }
@@ -104,6 +131,21 @@ void launchGame() {
     
     displayHS = !displayHS;
   }
+
+void mouseDragged() {
+  if (p.isOnGround) {
+    if (mouseY>= height/2) {
+      PVector temp = direction().normalize();
+      p.applyForce(PVector.mult(temp, p.jumpScalar));
+      p.isOnGround = false;
+    }
+  } else {
+    PVector temp = direction().normalize();
+    temp.y = 0;
+    p.applyForce(PVector.mult(temp, p.jumpScalar/33));
+    p.isOnGround = false;
+  }
+}
 
 void keyPressed() {
     p.userInput(key);

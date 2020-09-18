@@ -95,6 +95,13 @@ class Pawn implements Pan {
     }
   }
 
+<<<<<<< Updated upstream
+=======
+  void setJumpScalar(float input) {
+    this.jumpScalar = input;
+  }
+
+>>>>>>> Stashed changes
   void display() {
     pushMatrix();
     translate(x, y);
