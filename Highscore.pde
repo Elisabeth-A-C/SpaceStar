@@ -2,9 +2,11 @@ class HighScore {
   // skal være: render; save; load; write highscore; determine highscore; username input
   // format is "000   AAA"; this is a change.
   String[] scores = new String[11];
+  boolean scoreAdded;
 
   HighScore() {
     fetch();
+    scoreAdded = false;
   }
 
   void render() {
@@ -53,7 +55,7 @@ class HighScore {
   String addZeroes(int input) {
     // no numbers above 999
     if (input >= 1000) {
-      return "error";
+      return "000";
     } else if (input >= 100 && input <= 1000) {
       return Integer.toString(input);
     } else if (input >= 10) {

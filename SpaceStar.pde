@@ -35,7 +35,6 @@ void setup() {
   pannedObjects.add(platforms);
   pannedObjects.add(p);
   pannedObjects.add(item);
-  //pannedObjects.add(itemSystem);
   PFont f = createFont("Stencil", 100);
   textFont(f);
   HS = new HighScore();
@@ -112,6 +111,7 @@ void restart() {
     isDead = false;
   }
   backgroundMusic.loop();
+  HS.scoreAdded = false;
 }
 
 void launchGame() {
@@ -132,11 +132,6 @@ void launchGame() {
     text("esc = end game", 0.05*width, 0.90*height);
     text("m = mute", 0.05*width, 0.94*height);
     text("ENTER YOUR NAME: " + name, 0.4*width, 0.9*height);
-
-    //if (keyPressed) {
-    //  displayStartScreen = false;
-    //  restart();
-    //}
   }
 }
 
@@ -206,7 +201,7 @@ void deathScreen() {
     textSize(width*0.06);
     text("Tough Luck", 0.31*width, 0.45*height);
     text("You Died", 0.36*width, 0.55*height);
-    text("Score:" + HS.addZeroes(p.point), 0.36*width, 0.65*height); // TODO: center on screen
+    text("Score: " + HS.addZeroes(p.point), 0.335*width, 0.65*height); // TODO: center on screen
     textSize(width*0.02);
     text("r = restart", 0.1*width, 0.75*height);  
     text("h = highscore", 0.1*width, 0.79*height);
@@ -217,6 +212,11 @@ void deathScreen() {
     backgroundMusic.stop();
     isDead = true;
     deadBackgroundMusic = new SoundFile(this, "DeadBackgroundMusic.mp3");
-    deadBackgroundMusic.play();    
+    deadBackgroundMusic.play();
+    
+    if(HS.scoreAdded == false){
+      HS.newScore(name, p.point);
+      HS.scoreAdded = true;
+    }
   }
 }
