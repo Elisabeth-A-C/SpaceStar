@@ -36,12 +36,7 @@ void draw() {
   //p.update();
   p.moveAnd();
   p.updateLocal();
-<<<<<<< Updated upstream
-  if (frameCount %80 == 0) { // 80 is better.
-=======
-
   if (frameCount %150 == 0) { // 80 is better.
->>>>>>> Stashed changes
     platforms.addPlatform(platforms.getNewestPlatform());
     
   }
@@ -55,22 +50,18 @@ void draw() {
   for(int i = 0; i<dots.length; i++){
   dots[i].outOfScreen();
   }
-<<<<<<< Updated upstream
-=======
+
   displayButton();
 
   renderScore();
 
->>>>>>> Stashed changes
   deathScreen();
   displayHighScore();
 
   if (displayStartScreen) {
     launchGame();
   }
-<<<<<<< Updated upstream
-//  HS.render();
-=======
+
   SB.replace();
 }
 
@@ -78,7 +69,6 @@ void renderScore() {
   textSize(width * 0.035);
   fill(#ff0000);
   text(HS.addZeroes(p.point), width*0.9, height*0.1);
->>>>>>> Stashed changes
 }
 
 void pause() {
@@ -103,12 +93,8 @@ void restart() {
   platforms.empty();
   platforms.addPlatform(round(0.2*width), round(0.2*height));
   gameRunning = true;
-<<<<<<< Updated upstream
-  frameCount = 0;
-=======
   frameCount = 500; // this solves a problem with platforms remaining - with framecount 0 it does not update
   SB.move(-10*height);
->>>>>>> Stashed changes
 }
 
 void launchGame() {
@@ -145,21 +131,6 @@ void mouseDragged() {
     p.applyForce(PVector.mult(temp, p.jumpScalar/33));
     p.isOnGround = false;
   }
-}
-
-void keyPressed() {
-    p.userInput(key);
-    if (key == ' ') {
-      pause();
-    } else if (key == 'r') {
-      restart();
-    } else if(key == 'h'){
-      displayHighScore();
-    }else if (key == ESC) {
-    exit();
-    }
-
-  key ='o'; // control char, that should never be used.
 }
 
 boolean hasDied(Pawn star) {

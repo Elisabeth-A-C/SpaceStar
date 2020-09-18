@@ -1,6 +1,11 @@
 void displayButton(){
+<<<<<<< Updated upstream
   fill(255, 150); // TODOmake transparent
 <<<<<<< Updated upstream
+=======
+  fill(255, 150); 
+
+>>>>>>> Stashed changes
   ellipse(0.5*width, height*(3/4), width*(1/6), width*(1/6));
  
 PVector circleLocation = new PVector (0.5*width- mouseX, height*(3/4)- mouseY);
@@ -10,9 +15,13 @@ PVector circleLocation = new PVector (0.5*width- mouseX, height*(3/4)- mouseY);
   ellipse(circleLocation.x, circleLocation.y, width*(1/12), width*(1/12));
 }
 
+<<<<<<< Updated upstream
 PVector direction(){
   PVector temp = new PVector (0.5*width- mouseX, height*(3/4)- mouseY);
 =======
+=======
+
+>>>>>>> Stashed changes
 ellipse(width/2,height*3/4,width/3,width/3);
  
 PVector circleLocation = new PVector (width/2- mouseX, height*3/4- mouseY);
@@ -26,6 +35,7 @@ float y = height*1/14;
 float xsize = width/15;
 float ysize = width/15;
 
+<<<<<<< Updated upstream
 //mute
  fill(270,270)
 rect(x,y, xsize, );
@@ -42,6 +52,9 @@ if(mouseY >y && x<y+ysize){
 
 //pause
   fill(270,270)
+=======
+//pause
+>>>>>>> Stashed changes
 rect(width*6/7,height*1/14, width/15, width/15);
 if(mouseX >x&& x<x+xsize){
 if(mouseY >y&& x<y+ysize){
@@ -49,7 +62,7 @@ if(mouseY >y&& x<y+ysize){
    }
  }
 
- x =width*1/7;
+   x =width*6/7;
   y= height*1/14;
   xsize = width/15;
   ysize = width/15;
@@ -67,6 +80,9 @@ if(mouseY >y&& x<y+ysize){
 PVector direction(){
   PVector temp = new PVector (width/2- mouseX, height*3/4- mouseY);
  temp = PVector.mult(temp,-1);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 return temp.normalize();
 }
