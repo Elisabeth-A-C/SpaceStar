@@ -45,7 +45,7 @@ class Platform implements Pan {
 
   boolean isStandingOn(int centerX, int centerY, int radius) {
     if (centerX + radius/2 >= this.pos.x && centerX<= this.pos.x + this.dimensions.x + radius/2) {
-      if (centerY + radius >= this.pos.y -10 && centerY + radius <= this.pos.y + 10) {
+      if (centerY + radius >= this.pos.y -10 && centerY + radius <= this.pos.y + 1) {
         return true;
       }
     }
