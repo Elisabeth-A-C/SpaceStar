@@ -26,9 +26,20 @@ class HighScore {
     scores[scores.length-1] = newStr;
   }
 
-  void sortScoreBoard() {
-    // TODO: sort based on number not string
-    scores = sort(scores);
+  void sortScoresNumber() {
+    for (int i = 0; i < scores.length-1; i++)
+      for (int j = 0; j < scores.length-1; j++)
+        if (extractScore(scores[j]) < extractScore(scores[j+1])) {
+          String temp = scores[j];
+          scores[j] = scores[j+1];
+          scores[j+1] = temp;
+        }
+  }
+  
+    void sortScores() {
+      // expects numbers in start with added zeroes
+      scores = sort(scores);
+      scores = reverse(scores);
   }
 
   void keep(String[] output) {
@@ -52,7 +63,7 @@ class HighScore {
 
   void newScore(String name, int value) {
     changeListLast(addZeroes(value) + "   " + name);
-    sortScoreBoard();
+    sortScores();
   }
 
   int extractScore(String input) {
@@ -61,6 +72,6 @@ class HighScore {
 
   String singleInput() {
     //  TODO: implement this
-   return "error";
+    return "error";
   }
 }

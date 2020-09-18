@@ -208,7 +208,7 @@ void deathScreen() {
     text("Score:" + HS.addZeroes(p.point), 0.36*width, 0.65*height); // TODO: center on screen
     textSize(width*0.02);
     text("r = restart", 0.16*width, 0.72*height);  
-    text("h = highscore", 0.16*width, 0.78*height);
+    text("h = high score", 0.16*width, 0.78*height);
     text("esc = end game", 0.67*width, 0.75*height);
     noLoop();
     platforms.empty();
