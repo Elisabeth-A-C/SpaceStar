@@ -15,7 +15,7 @@ class HighScore {
     textSize(height/26);
     stroke(0);
     text("High Score", 0.425*width, 0.35*height);
-    for (int i = 0; i < scores.length; i++) {
+    for (int i = 0; i < scores.length-1; i++) {
       text(scores[i], 0.439*width, 0.04*i*height+height*0.4);
     }
   } 
