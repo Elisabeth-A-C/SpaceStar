@@ -54,7 +54,7 @@ void draw() {
   p.accDown(platforms.PlatformList.toArray(new Platform[0]));
 
   for (Pan q : pannedObjects) {
-    q.move(1+floor(p.point/25));
+    q.move(1+floor(p.point/40));
     q.render();
   }
   for (int i = 0; i<dots.length; i++) {
@@ -104,11 +104,15 @@ void restart() {
   frameCount = 500; // this solves a problem with platforms remaining
   SB.location.y = -5*height;
   p.point = 0;
-    if (isDead == true) {
-    deadBackgroundMusic.stop();
+  if (isDead == true) {
+    deadBackgroundMusic.pause();
     isDead = false;
   }
-  backgroundMusic.loop();
+  if (backgroundMusic.isPlaying()) {
+    backgroundMusic.play();
+  } else { 
+    backgroundMusic.pause();
+  }
   HS.scoreAdded = false;
 }
 
@@ -173,7 +177,7 @@ void keyPressed() {
   } else if (key == 'm' || key == 'M') {
     if (backgroundMusic.isPlaying()) {
       backgroundMusic.pause();
-    } else backgroundMusic.play(); //TODO: loop'er den stadig?
+    } else backgroundMusic.loop();
   }
 }
 
@@ -211,8 +215,8 @@ void deathScreen() {
     isDead = true;
     deadBackgroundMusic = new SoundFile(this, "DeadBackgroundMusic.mp3");
     deadBackgroundMusic.play();
-    
-    if(HS.scoreAdded == false){
+
+    if (HS.scoreAdded == false) {
       HS.newScore(name, p.point);
       HS.scoreAdded = true;
     }

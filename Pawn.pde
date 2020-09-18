@@ -30,7 +30,7 @@ class Pawn implements Pan {
     location.add(velocity);
     acceleration.mult(0);
     location = wrap(location);
-    jumpScalar = 5 + ((floor(p.point/25)));
+    jumpScalar = 6 + ((floor(p.point/25)));
   }
 
   void accDown(Platform[] p) {
