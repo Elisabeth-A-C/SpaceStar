@@ -4,7 +4,7 @@ class Pawn implements Pan {
   int point = 0;
 
   float speedLimit;
-  float jumpScalar = height/216;
+  float jumpScalar = height/210;
 
   boolean isOnGround;
   boolean doubleJump;  
