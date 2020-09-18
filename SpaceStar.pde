@@ -54,7 +54,6 @@ void draw() {
   p.accDown(platforms.PlatformList.toArray(new Platform[0]));
 
   for (Pan q : pannedObjects) {
-    //q.move(1+floor(1*(frameCount/8000)));
     q.move(1+floor(p.point/25));
     q.render();
   }

@@ -4,11 +4,11 @@ class Pawn implements Pan {
   int point = 0;
 
   float speedLimit;
-  float jumpScalar = height/210;
+  float jumpScalar;
 
   boolean isOnGround;
   boolean doubleJump;  
-  
+
   Pawn() {
     location = new PVector(0, 0);
     velocity = new PVector (0, 0);
@@ -30,6 +30,7 @@ class Pawn implements Pan {
     location.add(velocity);
     acceleration.mult(0);
     location = wrap(location);
+    jumpScalar = 5 + ((floor(p.point/25)));
   }
 
   void accDown(Platform[] p) {
@@ -76,7 +77,7 @@ class Pawn implements Pan {
   void setJumpScalar(float input) {
     this.jumpScalar = input;
   } 
-  
+
   void display() {
     pushMatrix();
     translate(this.location.x, this.location.y);
