@@ -1,7 +1,7 @@
 class HighScore {
   // skal være: render; save; load; write highscore; determine highscore; username input
-  // format is "AAA   000"
-  String[] scores = new String[10];
+  // format is "000   AAA"; this is a change.
+  String[] scores = new String[11];
 
   HighScore() {
     fetch();
@@ -13,7 +13,7 @@ class HighScore {
     textSize(40);
     stroke(0);
     text("HighScore", 0.425*width, 0.35*height);
-    for (int i = 0; i < scores.length; i++) {
+    for (int i = 0; i < scores.length-1; i++) {
       text(scores[i], 0.435*width, 0.04*i*height+height*0.4);
     }
   } 
@@ -60,7 +60,6 @@ class HighScore {
   }
 
   int extractScore(String input) {
-    return Integer.parseInt(input.substring(6,9));
+    return Integer.parseInt(input.substring(0,3));
   } 
-  
 }
