@@ -104,19 +104,20 @@ void restart() {
 void launchGame() {
   if (displayStartScreen) {
 
-    background(#2CDBBE);
+    background(#1DABAB);
     fill(240);
     textSize(width*0.05);
     text("SpaceSTAR", 0.355*width, 0.45*height);
     text("Press any key to Start", 0.20*width, 0.55*height);
     textSize(width*0.02);
-    text("up arrow/w = hop", 0.125*width, 0.25*height);
-    text("left arrow/a = left", 0.385*width, 0.25*height);
-    text("right arrow/d = right", 0.65*width, 0.25*height);
-    text("spacebar = pause", 0.4*width, 0.75*height);
-    text("r = restart", 0.16*width, 0.72*height);  
-    text("h = highscore", 0.16*width, 0.78*height);
-    text("esc = end game", 0.67*width, 0.75*height);
+    text("up arrow/w = hop", 0.05*width, 0.66*height);
+    text("left arrow/a = left", 0.05*width, 0.70*height);
+    text("right arrow/d = right", 0.05*width, 0.74*height);
+    text("spacebar = pause", 0.05*width, 0.78*height);
+    text("r = restart", 0.05*width, 0.82*height);  
+    text("h = highscore", 0.05*width, 0.86*height);
+    text("esc = end game", 0.05*width, 0.90*height);
+    text("m = mute", 0.05*width, 0.94*height);
 
     if (keyPressed) {
       displayStartScreen = false;
@@ -177,9 +178,9 @@ void deathScreen() {
     text("You Died", 0.36*width, 0.55*height);
     text("Score:" + HS.addZeroes(p.point), 0.36*width, 0.65*height); // TODO: center on screen
     textSize(width*0.02);
-    text("r = restart", 0.16*width, 0.72*height);  
-    text("h = highscore", 0.16*width, 0.78*height);
-    text("esc = end game", 0.67*width, 0.75*height);
+    text("r = restart", 0.1*width, 0.75*height);  
+    text("h = highscore", 0.1*width, 0.79*height);
+    text("esc = end game", 0.1*width, 0.83*height);
     noLoop();
     platforms.empty();
   }
