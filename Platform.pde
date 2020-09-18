@@ -2,7 +2,8 @@ class Platform implements Pan {
   PVector pos;
   PVector dimensions;
   color paint;
-
+  boolean containsPoint = true;
+  
   Platform() {
     this.dimensions = new PVector(150, 25);
     this.pos = new PVector(0, 0);
@@ -39,7 +40,7 @@ class Platform implements Pan {
   }
 
   boolean isStandingOn(Pawn star) {
-    return isStandingOn(round(star.x), round(star.y), 50);
+    return isStandingOn(round(star.location.x), round(star.location.y), 50);
   }
 
   boolean isStandingOn(int centerX, int centerY, int radius) {

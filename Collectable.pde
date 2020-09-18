@@ -19,7 +19,7 @@ class Collectable implements Pan {
 
   boolean istouching(Pawn star) {
     float radius = 20;
-    if (star.x <= pos.x + radius && star.x >= pos.x -radius && star.y <= pos.y + radius && star.y >= pos.y -radius) {
+    if (star.location.x <= pos.x + radius && star.location.x >= pos.x -radius && star.location.y <= pos.y + radius && star.location.y >= pos.y -radius) {
       return true;
     }
     return false;
@@ -46,6 +46,10 @@ class Collectable implements Pan {
 }
 
 class Coin extends Collectable {
+  Coin(PVector _pos) {
+    super(_pos);
+  }
+
   void star(float x, float y, float radius1, float radius2, int npoints) {
     float angle = TWO_PI / npoints;
     float halfAngle = angle/2;
@@ -70,21 +74,25 @@ class Coin extends Collectable {
   }
 }
 
-
 class Doublejump extends Collectable {
+
+  Doublejump(PVector _pos) {
+    super(_pos);
+  }
   void render() {
     fill(#FF1919);
     circle(pos.x, pos.y, 10);
   }
 
   void powerup(Pawn star) {
-    //TODO implement this
-    //Man skal få et doppelthop når stjernen får denne collectable
+    star.doubleJump = true;
   }
 }
 
-
 class Changecolor extends Collectable {
+  Changecolor(PVector _pos) {
+    super(_pos);
+  }
   void render() {
     fill(#EF19FF);
     circle(pos.x, pos.y, 10);
@@ -96,8 +104,10 @@ class Changecolor extends Collectable {
   }
 }
 
-
 class Higherjump extends Collectable {
+  Higherjump(PVector _pos) {
+    super(_pos);
+  }
   void render() {
     fill(#19FFD1);
     circle(pos.x, pos.y, 10);

@@ -9,7 +9,7 @@ class StarBand implements Pan {
     location.y += yChange;
   }
 
-  void render() {
+  void render() { // this is not a rainbow
     strokeWeight(height/75);
     color[] list = {#663dc7, #7d42ea, #9165e2, #ba79f6, #c975e6, #d271ca, #df6d9c};
     for (int i = 0; i<7; i++) {

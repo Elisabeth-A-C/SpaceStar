@@ -6,21 +6,17 @@ class Background extends Platform implements Pan {
     circle(pos.x, pos.y, size);
   }
 
-  //TODO: make constructors refrence each other.
-
   Background(PVector _pos, int _size) {
     size = _size;
     pos = _pos;
   }
 
   Background(PVector _pos) {
-    pos = _pos;
-    size = round(random(3, 11));
+    this(_pos, round(random(3, 11)));
   }
 
   Background() {
-    pos = new PVector(random(width), random(height));
-    size = round(random(3, 11));
+    this(new PVector(random(width), random(height)));
   }
 
   void moveScreen() {
@@ -28,6 +24,8 @@ class Background extends Platform implements Pan {
   }
 
   void outOfScreen() {
-    if (pos.y >= height) moveScreen();
+    if (pos.y >= height) { 
+      moveScreen();
+    }
   }
 }

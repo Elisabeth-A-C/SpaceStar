@@ -15,6 +15,7 @@ SoundFile deadBackgroundMusic;
 Pawn p;
 PlatformSystem platforms;
 Collectable item;
+CollectableSystem itemSystem;
 
 ArrayList<Pan> pannedObjects = new ArrayList<Pan>();
 Background[]dots = new Background[125];
@@ -34,6 +35,7 @@ void setup() {
   pannedObjects.add(platforms);
   pannedObjects.add(p);
   pannedObjects.add(item);
+  //pannedObjects.add(itemSystem);
   PFont f = createFont("Stencil", 100);
   textFont(f);
   HS = new HighScore();
@@ -47,12 +49,14 @@ void draw() {
 
   if (frameCount %150 == 0) { // 80 is better.
     platforms.addPlatform(platforms.getNewestPlatform());
+    //itemSystem.addCol(platforms.getNewestPlatform());
   }
 
   p.accDown(platforms.PlatformList.toArray(new Platform[0]));
 
   for (Pan q : pannedObjects) {
-    q.move(1+floor(1*(frameCount/8000)));
+    //q.move(1+floor(1*(frameCount/8000)));
+    q.move(1+floor(p.point/25));
     q.render();
   }
   for (int i = 0; i<dots.length; i++) {
@@ -65,9 +69,8 @@ void draw() {
 
   displayHighScore();
 
-  if (displayStartScreen) {
-    launchGame();
-  }
+  launchGame();
+
   SB.replace();
   // HS.render(); //TODO: DELETE THIS
 }
@@ -103,7 +106,8 @@ void restart() {
   gameRunning = true;
   frameCount = 500; // this solves a problem with platforms remaining
   SB.move(-10*height);
-  if (isDead == true) {
+  p.point = 0;
+    if (isDead == true) {
     deadBackgroundMusic.stop();
     isDead = false;
   }
@@ -111,18 +115,28 @@ void restart() {
 }
 
 void launchGame() {
-  //gameRunning = true;
-  background(#2CDBBE);
-  fill(240);
-  textSize(width*0.05);
-  text("SpaceSTAR", 0.355*width, 0.45*height);
-  text("Press any key to Start", 0.20*width, 0.55*height);
-  text("ENTER YOUR NAME: " + name, 0.4*width, 0.9*height);
+  if (displayStartScreen) {
 
-  //if (keyPressed) {
-  //  displayStartScreen = false;
-  //  restart();
-  //}
+    background(#2CDBBE);
+    fill(240);
+    textSize(width*0.05);
+    text("SpaceSTAR", 0.355*width, 0.45*height);
+    text("Press any key to Start", 0.20*width, 0.55*height);
+    textSize(width*0.02);
+    text("up arrow/w = hop", 0.125*width, 0.25*height);
+    text("left arrow/a = left", 0.385*width, 0.25*height);
+    text("right arrow/d = right", 0.65*width, 0.25*height);
+    text("spacebar = pause", 0.4*width, 0.75*height);
+    text("r = restart", 0.16*width, 0.72*height);  
+    text("h = highscore", 0.16*width, 0.78*height);
+    text("esc = end game", 0.67*width, 0.75*height);
+    text("ENTER YOUR NAME: " + name, 0.4*width, 0.9*height);
+
+    //if (keyPressed) {
+    //  displayStartScreen = false;
+    //  restart();
+    //}
+  }
 }
 
 void displayHighScore() {
@@ -180,7 +194,7 @@ void keyReleased() {
 }
 
 boolean hasDied(Pawn star) {
-  return star.y > height;
+  return star.location.y > height;
 }
 
 void deathScreen() {
@@ -191,11 +205,16 @@ void deathScreen() {
     textSize(width*0.06);
     text("Tough Luck", 0.31*width, 0.45*height);
     text("You Died", 0.36*width, 0.55*height);
+    text("Score:" + HS.addZeroes(p.point), 0.36*width, 0.65*height); // TODO: center on screen
+    textSize(width*0.02);
+    text("r = restart", 0.16*width, 0.72*height);  
+    text("h = highscore", 0.16*width, 0.78*height);
+    text("esc = end game", 0.67*width, 0.75*height);
     noLoop();
     platforms.empty();
     backgroundMusic.stop();
     isDead = true;
     deadBackgroundMusic = new SoundFile(this, "DeadBackgroundMusic.mp3");
-    deadBackgroundMusic.play();
+    deadBackgroundMusic.play();    
   }
 }
