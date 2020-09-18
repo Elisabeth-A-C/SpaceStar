@@ -40,11 +40,11 @@ class Platform implements Pan {
   }
 
   boolean isStandingOn(Pawn star) {
-    return isStandingOn(round(star.location.x), round(star.location.y), 50);
+    return isStandingOn(round(star.location.x), round(star.location.y), 50, round(star.velocity.y));
   }
 
-  boolean isStandingOn(int centerX, int centerY, int radius) {
-    if (centerX + radius/2 >= this.pos.x && centerX<= this.pos.x + this.dimensions.x + radius/2) {
+  boolean isStandingOn(int centerX, int centerY, int radius, int yVelocity) {
+    if (yVelocity > -0.01 && centerX + radius/2 >= this.pos.x && centerX<= this.pos.x + this.dimensions.x + radius/2) {
       if (centerY + radius >= this.pos.y -10 && centerY + radius <= this.pos.y + 1) {
         return true;
       }
