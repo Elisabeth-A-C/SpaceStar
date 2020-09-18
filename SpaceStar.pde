@@ -6,6 +6,7 @@ boolean up, left, right;
 boolean isDead = false;
 HighScore HS;
 StarBand SB;
+String name = "";
 
 import processing.sound.*;
 SoundFile backgroundMusic;
@@ -116,11 +117,12 @@ void launchGame() {
   textSize(width*0.05);
   text("SpaceSTAR", 0.355*width, 0.45*height);
   text("Press any key to Start", 0.20*width, 0.55*height);
+  text("ENTER YOUR NAME: " + name, 0.4*width, 0.9*height);
 
-  if (keyPressed) {
-    displayStartScreen = false;
-    restart();
-  }
+  //if (keyPressed) {
+  //  displayStartScreen = false;
+  //  restart();
+  //}
 }
 
 void displayHighScore() {
@@ -131,6 +133,18 @@ void displayHighScore() {
 }
 
 void keyPressed() {
+  if (displayStartScreen == true) {
+    if (key == ESC) exit();
+    if (key == ENTER && name.length() == 3) {
+      displayStartScreen = false;
+      restart();
+      return;
+    }
+  }
+
+  if (name.length() < 3 && (key >= 'A' && key <= 'Z')) {
+    name = name + key;
+  }
   if (key == ' ') {
     pause();
   } else if (key == 'r') {
