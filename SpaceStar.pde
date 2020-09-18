@@ -3,8 +3,14 @@ boolean gameRunning;
 boolean displayStartScreen = true;
 boolean displayHS = false;
 boolean up, left, right;
+boolean isDead = false;
 HighScore HS;
 StarBand SB;
+String name = "";
+
+import processing.sound.*;
+SoundFile backgroundMusic;
+SoundFile deadBackgroundMusic;
 
 Pawn p;
 PlatformSystem platforms;
@@ -33,12 +39,13 @@ void setup() {
   PFont f = createFont("Stencil", 100);
   textFont(f);
   HS = new HighScore();
+  backgroundMusic = new SoundFile(this, "SpaceStarBackgroundMusic.mp3");
 }
 
 void draw() {
   background(#02043c);
   p.userInput(up, left, right);
-  p.updateLocal();
+  p.updateLocal(); 
 
   if (frameCount %150 == 0) { // 80 is better.
     platforms.addPlatform(platforms.getNewestPlatform());
@@ -65,6 +72,7 @@ void draw() {
   launchGame();
 
   SB.replace();
+  // HS.render(); //TODO: DELETE THIS
 }
 
 void renderScore() {
@@ -99,6 +107,11 @@ void restart() {
   frameCount = 500; // this solves a problem with platforms remaining
   SB.move(-10*height);
   p.point = 0;
+    if (isDead == true) {
+    deadBackgroundMusic.stop();
+    isDead = false;
+  }
+  backgroundMusic.loop();
 }
 
 void launchGame() {
@@ -117,11 +130,12 @@ void launchGame() {
     text("r = restart", 0.16*width, 0.72*height);  
     text("h = highscore", 0.16*width, 0.78*height);
     text("esc = end game", 0.67*width, 0.75*height);
+    text("ENTER YOUR NAME: " + name, 0.4*width, 0.9*height);
 
-    if (keyPressed) {
-      displayStartScreen = false;
-      restart();
-    }
+    //if (keyPressed) {
+    //  displayStartScreen = false;
+    //  restart();
+    //}
   }
 }
 
@@ -133,6 +147,18 @@ void displayHighScore() {
 }
 
 void keyPressed() {
+  if (displayStartScreen == true) {
+    if (key == ESC) exit();
+    if (key == ENTER && name.length() == 3) {
+      displayStartScreen = false;
+      restart();
+      return;
+    }
+  }
+
+  if (name.length() < 3 && (key >= 'A' && key <= 'Z')) {
+    name = name + key;
+  }
   if (key == ' ') {
     pause();
   } else if (key == 'r') {
@@ -150,6 +176,10 @@ void keyPressed() {
     right = true;
   } else if (key == 'w' || key == 'W' || (key == CODED && keyCode == UP)) {
     up = true;
+  } else if (key == 'm' || key == 'M') {
+    if (backgroundMusic.isPlaying()) {
+      backgroundMusic.pause();
+    } else backgroundMusic.play(); //TODO: loop'er den stadig?
   }
 }
 
@@ -178,9 +208,13 @@ void deathScreen() {
     text("Score:" + HS.addZeroes(p.point), 0.36*width, 0.65*height); // TODO: center on screen
     textSize(width*0.02);
     text("r = restart", 0.16*width, 0.72*height);  
-    text("h = highscore", 0.16*width, 0.78*height);
+    text("h = high score", 0.16*width, 0.78*height);
     text("esc = end game", 0.67*width, 0.75*height);
     noLoop();
     platforms.empty();
+    backgroundMusic.stop();
+    isDead = true;
+    deadBackgroundMusic = new SoundFile(this, "DeadBackgroundMusic.mp3");
+    deadBackgroundMusic.play();    
   }
 }

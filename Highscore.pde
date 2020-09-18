@@ -10,11 +10,11 @@ class HighScore {
   void render() {
     background(0);
     fill(12, 184, 252);
-    textSize(40);
+    textSize(height/26);
     stroke(0);
-    text("HighScore", 0.425*width, 0.35*height);
-    for (int i = 0; i < scores.length-1; i++) {
-      text(scores[i], 0.435*width, 0.04*i*height+height*0.4);
+    text("High Score", 0.425*width, 0.35*height);
+    for (int i = 0; i < scores.length; i++) {
+      text(scores[i], 0.439*width, 0.04*i*height+height*0.4);
     }
   } 
 
@@ -26,8 +26,20 @@ class HighScore {
     scores[scores.length-1] = newStr;
   }
 
-  void sortScoreBoard() {
-    scores = sort(scores);
+  void sortScoresNumber() {
+    for (int i = 0; i < scores.length-1; i++)
+      for (int j = 0; j < scores.length-1; j++)
+        if (extractScore(scores[j]) < extractScore(scores[j+1])) {
+          String temp = scores[j];
+          scores[j] = scores[j+1];
+          scores[j+1] = temp;
+        }
+  }
+  
+    void sortScores() {
+      // expects numbers in start with added zeroes
+      scores = sort(scores);
+      scores = reverse(scores);
   }
 
   void keep(String[] output) {
@@ -51,12 +63,7 @@ class HighScore {
 
   void newScore(String name, int value) {
     changeListLast(addZeroes(value) + "   " + name);
-    sortScoreBoard();
-  }
-
-  String usernameInput() {
-    String temp = new String();
-    return temp;
+    sortScores();
   }
 
   int extractScore(String input) {
