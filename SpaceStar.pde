@@ -30,7 +30,7 @@ void setup() {
     pannedObjects.add(dots [i]);
   }
   item = new Collectable(new PVector(200, 200));
-  SB = new StarBand(new PVector(0, -10*height));
+  SB = new StarBand(new PVector(0, -5*height));
   pannedObjects.add(SB);
   pannedObjects.add(platforms);
   pannedObjects.add(p);
@@ -71,7 +71,6 @@ void draw() {
   launchGame();
 
   SB.replace();
-  // HS.render(); //TODO: DELETE THIS
 }
 
 void renderScore() {
@@ -104,7 +103,7 @@ void restart() {
   platforms.addPlatform(round(0.40*width), round(0.1*height));
   gameRunning = true;
   frameCount = 500; // this solves a problem with platforms remaining
-  SB.move(-10*height);
+  SB.location.y = -5*height;
   p.point = 0;
     if (isDead == true) {
     deadBackgroundMusic.stop();
