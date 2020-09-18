@@ -108,9 +108,7 @@ void restart() {
     deadBackgroundMusic.pause();
     isDead = false;
   }
-  if (backgroundMusic.isPlaying()) {
-    backgroundMusic.play();
-  } else { 
+  if (!backgroundMusic.isPlaying()) {
     backgroundMusic.pause();
   }
   HS.scoreAdded = false;
@@ -177,7 +175,7 @@ void keyPressed() {
   } else if (key == 'm' || key == 'M') {
     if (backgroundMusic.isPlaying()) {
       backgroundMusic.pause();
-    } else backgroundMusic.loop();
+    } else backgroundMusic.play();
   }
 }
 
@@ -208,17 +206,20 @@ void deathScreen() {
     text("r = restart", 0.1*width, 0.75*height);  
     text("h = highscore", 0.1*width, 0.79*height);
     text("esc = end game", 0.1*width, 0.83*height);
-
     noLoop();
     platforms.empty();
     backgroundMusic.stop();
     isDead = true;
+  }
+
+  if (isDead == true) {
     deadBackgroundMusic = new SoundFile(this, "DeadBackgroundMusic.mp3");
     deadBackgroundMusic.play();
+  }
 
-    if (HS.scoreAdded == false) {
-      HS.newScore(name, p.point);
-      HS.scoreAdded = true;
-    }
+
+  if (HS.scoreAdded == false) {
+    HS.newScore(name, p.point);
+    HS.scoreAdded = true;
   }
 }
