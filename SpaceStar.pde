@@ -38,7 +38,6 @@ void setup() {
   PFont f = createFont("Stencil", 100);
   textFont(f);
   HS = new HighScore();
-  backgroundMusic = new SoundFile(this, "SpaceStarBackgroundMusic.mp3");
 }
 
 void draw() {
@@ -61,6 +60,8 @@ void draw() {
   for (int i = 0; i<dots.length; i++) {
     dots[i].outOfScreen();
   }
+
+  displayButton();
 
   renderScore();
 
@@ -105,13 +106,9 @@ void restart() {
   frameCount = 500; // this solves a problem with platforms remaining
   SB.location.y = -5*height;
   p.point = 0;
-    if (isDead == true) {
-    deadBackgroundMusic.stop();
-    isDead = false;
   }
-  backgroundMusic.loop();
-  HS.scoreAdded = false;
-}
+  //HS.scoreAdded = false;
+
 
 void launchGame() {
   if (displayStartScreen) {
@@ -120,17 +117,12 @@ void launchGame() {
     fill(240);
     textSize(width*0.03);
     text("SpaceSTAR", 0.4*width, 0.45*height);
-    text("Enter name and press enter to start", 0.20*width, 0.55*height);
+    text("pressto start", 0.20*width, 0.55*height);
     textSize(width*0.02);
-    text("up arrow/w = hop", 0.05*width, 0.66*height);
-    text("left arrow/a = left", 0.05*width, 0.70*height);
-    text("right arrow/d = right", 0.05*width, 0.74*height);
-    text("spacebar = pause", 0.05*width, 0.78*height);
-    text("r = restart", 0.05*width, 0.82*height);  
-    text("h = highscore", 0.05*width, 0.86*height);
-    text("esc = end game", 0.05*width, 0.90*height);
-    text("m = mute", 0.05*width, 0.94*height);
-    text("ENTER YOUR NAME: " + name, 0.4*width, 0.9*height);
+  }
+  if(mousePressed){
+  displayStartScreen = false; 
+  restart();
   }
 }
 
@@ -140,15 +132,18 @@ void displayHighScore() {
     noLoop();
   }
 }
-
-void keyPressed() {
-  if (displayStartScreen == true) {
-    if (key == ESC) exit();
-    if (key == ENTER && name.length() == 3) {
-      displayStartScreen = false;
-      restart();
-      return;
+void mouseDragged() {
+  if (p.isOnGround) {
+    if (mouseY>= height/2) {
+      PVector temp = direction().normalize();
+      p.applyForce(PVector.mult(temp, p.jumpScalar));
+      p.isOnGround = false;
     }
+  } else {
+    PVector temp = direction().normalize();
+    temp.y = 0;
+    p.applyForce(PVector.mult(temp, p.jumpScalar/33));
+    p.isOnGround = false;
   }
 
   if (name.length() < 3 && (key >= 'A' && key <= 'Z')) {
@@ -171,20 +166,6 @@ void keyPressed() {
     right = true;
   } else if (key == 'w' || key == 'W' || (key == CODED && keyCode == UP)) {
     up = true;
-  } else if (key == 'm' || key == 'M') {
-    if (backgroundMusic.isPlaying()) {
-      backgroundMusic.pause();
-    } else backgroundMusic.play(); //TODO: loop'er den stadig?
-  }
-}
-
-void keyReleased() {
-  if (key == 'a' || key == 'A' || key == LEFT || (key == CODED && keyCode == LEFT)) {
-    left = false;
-  } else if (key == 'd' || key == 'D' || (key == CODED && keyCode == RIGHT)) {
-    right = false;
-  } else if (key == 'w' || key == 'W' || (key == CODED && keyCode == UP)) {
-    up = false;
   }
 }
 
@@ -208,10 +189,7 @@ void deathScreen() {
 
     noLoop();
     platforms.empty();
-    backgroundMusic.stop();
     isDead = true;
-    deadBackgroundMusic = new SoundFile(this, "DeadBackgroundMusic.mp3");
-    deadBackgroundMusic.play();
     
     if(HS.scoreAdded == false){
       HS.newScore(name, p.point);
