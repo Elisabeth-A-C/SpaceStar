@@ -45,6 +45,10 @@ class HighScore {
   void keep(String[] output) {
     saveStrings("highScores.txt", output);
   }
+  
+  void keep() {
+  keep(scores);
+  }
 
   String addZeroes(int input) {
     // no numbers above 999
@@ -64,6 +68,7 @@ class HighScore {
   void newScore(String name, int value) {
     changeListLast(addZeroes(value) + "   " + name);
     sortScores();
+    keep();
   }
 
   int extractScore(String input) {

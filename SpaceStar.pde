@@ -119,9 +119,9 @@ void launchGame() {
 
     background(#2CDBBE);
     fill(240);
-    textSize(width*0.05);
-    text("SpaceSTAR", 0.355*width, 0.45*height);
-    text("Press any key to Start", 0.20*width, 0.55*height);
+    textSize(width*0.03);
+    text("SpaceSTAR", 0.4*width, 0.45*height);
+    text("Enter name and press enter to start", 0.20*width, 0.55*height);
     textSize(width*0.02);
     text("up arrow/w = hop", 0.125*width, 0.25*height);
     text("left arrow/a = left", 0.385*width, 0.25*height);
